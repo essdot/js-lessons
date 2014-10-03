@@ -12,4 +12,4 @@ Disco! ✨🌐✨
 
 #### A note about style
 
-I don't use semicolons. Feel free to fork this repo and replace the examples with ones that match your stylistic preferences :)
+The style of Javascript used in the examples may be a bit unfamiliar to you. Even if you don't care for it, consider that you will read lots of different people's code over time. So it's worth making an effort to understand code even when you don't like how it's written. :)
