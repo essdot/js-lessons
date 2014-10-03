@@ -102,10 +102,12 @@ The array prototype defines a bunch of useful methods like `indexOf`, and they a
 
 Functions are objects. Their constructor is `Function`. Their prototype is `Function.prototype`. But functions have a very special attribute that other objects do not: they can be called. In the ECMAScript spec, they are said to be "Callable".
 
-`var myFunc = function() {}`
-`var myObj = {}`
-`myFunc()`
-`myObj()    // TypeError: object is not a function`
+```javascript
+var myFunc = function() {}
+var myObj = {}
+myFunc()
+myObj()    // TypeError: object is not a function
+```
 
 You can call a function by using the function-call operator, the two parentheses, as above. You can also use `call` or `apply`. You can also use `new`.
 
@@ -113,9 +115,11 @@ Functions have a `length` property too. It represents the number of arguments th
 
 But again, functions are objects. You can set properties on them just like other objects.
 
-`var myFunc = function() {}`
-`myFunc.foo = 5`
-`myFunc['foo']   // returns 5`
+```javascript
+var myFunc = function() {}
+myFunc.foo = 5
+myFunc['foo']   // returns 5
+```
 
 
 ## Numbers
