@@ -1,6 +1,6 @@
 # JS-Lessons
 
-I've written some Javascripts in my day. This is my attempt at explaining some parts of how the language works. It will focus on parts of JS which typically do not get in-depth explanations, or which I find to be generally poorly understood.
+I've written some Javascripts in my day. This is my attempt at explaining some parts of how the language work. It will focus on parts of JS which typically do not get in-depth explanations, or which I find to be generally poorly understood.
 
 This is not intended for beginners to Javascript, or beginners to programming. This is intended for people who use Javascript often and would like to understand it better.
 
