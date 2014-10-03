@@ -89,8 +89,15 @@ myFunc()                 // inside myFunc, this will be the global object
 
 `call` and `apply` are much the same, the only difference is in how you provide the arguments. If you're using `apply`, the arguments are in an array. If you're using `call`, you pass the arguments directly.
 
-myFunction.call(thisValue, arg1, arg2, arg3...)
-myFunction.apply(thisValue, [argumentsArray])
+Using `call` looks like this: 
+```javascript
+`myFunction.call(thisValue, arg1, arg2, arg3...)`
+```
+
+Using `apply` looks like this: 
+```javascript
+myFunction.apply(thisValue, [argumentsArray])`
+```
 
 ```javascript
 function add3NumsToThis(a, b, c) {
@@ -114,7 +121,7 @@ function Customer(name) {
 }  
 ```
 
-The reason for this convention is simple: If you accidentally call a constructor as a function, without `new`, `this` will refer to the global object, and the constructor will do the wrong thing.
+The reason for this convention is simple: If you accidentally call a constructor as a function, without `new`, `this` will refer to the global object, and the constructor will do the wrong thing. The capitalized name is a clue that the function is a constructor, intended to be called with `new`.
 
 It is possible to check for this problem and correct it at runtime:
 
@@ -407,3 +414,4 @@ replaceIt(o)
 ```
 
 The line `o = newObj` simply *rebinds* the variable `o` to a new value, the value of `newObj`. It is not replacing the reference to the object that was passed in to `replaceIt`.
+

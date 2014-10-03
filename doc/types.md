@@ -180,11 +180,12 @@ if(someValue) {
 }
 ```
 
-To check what boolean value a given value will coerce to, call the `Boolean` constructor as a function. Or prefix with `!!`.
+To coerce a value to a boolean, call the `Boolean` constructor as a function, or prefix with `!!`.
 
 ```javascript
 Boolean({})        // returns true
 !!{}               // returns true
+!!''               // returns false
 ```
 
 ### Number
@@ -197,10 +198,11 @@ Boolean({})        // returns true
 
 Everything else coerces to `NaN`.
 
-To check what boolean value a given value will coerce to, call the `Number` constructor as a function. Or subtract 0.
+To coerce a value to a number, call the `Number` constructor as a function, or subtract 0.
 
 ```javascript
 Number('5')          // returns 5
+Number('abc')        // returns NaN
 '5' - 0              // returns 5
 ```
 
@@ -210,16 +212,15 @@ Number('5')          // returns 5
 * null coerces to 'null'
 * `true` coerces to 'true'
 * `false` coerces to 'false'
-* `NaN` coerces to 'NaN'
-* `Infinity` coerces to 'Infinity'
-* Other numbers coerce to a string representation of the number
+* numbers coerce to a string representation of the number (this includes Infinity and NaN)
 * Objects coerce to the result of calling `toString()`. `Array.prototype.toString()` returns the elements of the array separated by commas.
 
-To check what boolean value a given value will coerce to, call the `Number` constructor as a function. Or add ''.
+To coerce a value to a string, call the `String` constructor as a function, or add ''. If the value is an object, you can call its `toString()` method.
 
 ```javascript
 String(6)         // returns '6'
 6 + ''            // returns '6'
+String([1, 2, 3]) // returns '1,2,3'
 ```
 
 
