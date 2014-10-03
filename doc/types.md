@@ -128,10 +128,12 @@ There is only one number type in Javascript. Many other languages distinguish be
 
 When dealing with numbers in Javascript, you need to watch out for `NaN` and `Infinity`. 
 
-`1 / 0         // returns Infinity`
-`-1 / 0        // returns -Infinity`
-`0 / 0         // returns NaN`
-`5 - 'abc'     // returns NaN`
+```javascript
+1 / 0         // returns Infinity
+-1 / 0        // returns -Infinity
+0 / 0         // returns NaN
+5 - 'abc'     // returns NaN
+```
 
 Any arithmetic operation that attempts to use a non-number value which can't be coerced into a number will result in `NaN`.
 
