@@ -7,7 +7,7 @@ In Javascript, functions are objects. Unlike other JS objects, they are callable
 
 Functions can accept any number of arguments, and be called with any number of arguments. It is not an error to call a function with a different number of arguments than the function declares. The unsupplied arguments will have a value of `undefined`.
 
-```
+```javascript
 function log3(first, second, third) {
   console.log(first)
   console.log(second)
@@ -22,7 +22,7 @@ Arguments in Javascript are always positional, there are no keyword args like in
 
 In the body of a function, you can access `arguments`, which is an array-like object containing the arguments the function was called with, in order. This allows you to write functions that can accept any number of arguments:
 
-```
+```javascript
 function sum() {
   var result = 0
 
@@ -38,12 +38,11 @@ sum(2, 5)
 
 // returns 4
 sum(1, 1, 1, 1)
-
 ```
 
 Use `arguments` in a read-only way, do not try to manipulate its contents. If you need to do that sort of thing, make a copy of it first. But since `arguments` is  not really an array, you have to get a little creative:
 
-```
+```javascript
 var argsCopy = [].slice.call(arguments)
 ```
 
@@ -89,7 +88,7 @@ If a function is a property of an object, and the object is present at the site 
 myFunction.call(thisValue, arg1, arg2, arg3...)
 myFunction.apply(thisValue, [argumentsArray])
 
-```
+```javascript
 function add3NumsToThis(a, b, c) {
   return this + a + b + c
 }
@@ -104,7 +103,7 @@ add3NumsToThis.apply(6, [1, 1, 1])    // returns 9
 
 `new` is an operator that takes a function as an operand. It creates an object and then invokes the function in the context of the newly-created object. Functions that are intended to be called with `new` are called constructors, and by convention the function's name should be capitalized.
 
-```
+```javascript
 // constructor for Customer objects
 function Customer(name) {
   this.name = name
@@ -115,7 +114,7 @@ The reason for this convention is simple: If you accidentally call a constructor
 
 It is possible to check for this problem and correct it at runtime:
 
-```
+```javascript
 // constructor for Customer objects
 function Customer(name) {
   if(!(this instanceof Customer)) {
@@ -138,7 +137,7 @@ Here we check to see if `this` is what we are expecting -- an object whose const
 
 A function's `bind` method takes a `this` value, and returns a new function. When the new function is called, it will execute the original function, with `this` set to the value passed to `bind`.
 
-```
+```javascript
 function myFunc() { return this.num }
 
 // returns undefined
@@ -156,7 +155,7 @@ myBoundFunc()
 
 `bind` can also be used to "partially apply" functions. This means that `bind` can pre-fill some of the function's arguments. When the new function is called, the pre-filled arguments will be combined with the current arguments and they will all be passed to the original function.
 
-```
+```javascript
 function add3Nums(a, b, c) {
   return a + b + c
 }
@@ -178,7 +177,7 @@ add7(4)
 
 Functions can have names, or they can be anonymous. 
 
-```
+```javascript
 // function named myFunc, assigned to variable "x"
 var x = function myFunc() {}
 
@@ -202,13 +201,13 @@ A function expression evaluates to the function. A function statement, on the ot
 
 This means that the following results in a syntax error:
 
-```
+```javascript
 function myFunc() {}()
 ```
 
 The solution is to put anything before `function`, so that it is no longer a function statement but a function expression, which can be invoked directly.
 
-```
+```javascript
 // all valid
 (function myFunc() {})()
 +function myFunc() {} ()
@@ -221,13 +220,13 @@ The solution is to put anything before `function`, so that it is no longer a fun
 
 A function statement does two things: it creates a named function, and declares a variable whose value is the function. Because of this variable declaration, anonymous functions are not allowed in function statements.
 
-```
+```javascript
 function myFunc() {}
 ```
 
 does this:
 
-```
+```javascript
 var myFunc = function myFunc() {}
 ```
 
@@ -235,7 +234,7 @@ var myFunc = function myFunc() {}
 
 In Javascript, functions can be declared inside of other functions.
 
-```
+```javascript
 function outerFunc() {
   var x = 5
 
@@ -252,7 +251,7 @@ function outerFunc() {
 In Javascript, a function has access to everything in the scope in which it was created. Even after the lifetime of the outer function has passed, the inner function can still access and manipulate the variables in its enclosing scope. This is very powerful, and has many uses. It is also the only way to have truly private variables in Javascript.
 
 
-```
+```javascript
 function outerFunc() {
   var x = 5
 
@@ -283,7 +282,7 @@ However, any variable with a name that matches the name of a variable in the out
 
 
 
-```
+```javascript
 function outerFunc() {
   var x = 5
 
@@ -309,7 +308,7 @@ innerFunc()
 The same would be true if `x` was a parameter to `innerFunc` rather than declared within the body of `innerFunc`:
 
 
-```
+```javascript
 function outerFunc() {
   var x = 5
 
@@ -336,7 +335,7 @@ innerFunc()
 
 Primitive values are passed to functions by value. Objects are passed to functions by reference. This means that, for primitive values, the value is copied and the function receives the copy. No matter what happens inside the function, the value will be the same after the function returns, because it got a copy of the value.
 
-```
+```javascript
 function logIt(arg)
   console.log(arg)
 
@@ -358,7 +357,7 @@ If an object is passed into a function, it is not copied. The function receives 
 
 The state inside the object can be mutated: properties of the object can be deleted, or replaced, or new properties added to the object. After the function returns, those changes will still be there:
 
-```
+```javascript
 function changeIt(o) {
   o.num = 11
   delete o.str
@@ -374,11 +373,9 @@ changeIt(o)
 
 ```
 
-
 But the object itself cannot be replaced inside the function:
 
-
-```
+```javascript
 function replaceIt(o) {
   var myNewObj = {
     a: [1, 2, 3],

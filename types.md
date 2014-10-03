@@ -31,7 +31,9 @@ Yes, that is true. Let's talk about `typeof`.
 The `typeof` operator is poorly named: it does not tell you the type of
 its operand. At least, not always. `typeof` can still be useful, but you should be aware that it can lie to you.
 
-`typeof null    // returns 'object'`
+```javascript
+typeof null    // returns 'object'
+```
 
 See? The type of `null` is null. Not object.
 
@@ -136,9 +138,11 @@ Any arithmetic operation that attempts to use a non-number value which can't be 
 
 Be careful with the built-in `isNaN()` function. Its job is to tell you whether the value *would coerce to NaN*. This is different from telling you whether the value *is NaN*. 
 
-`isNaN(NaN)            // returns true`
-`isNaN('abc')          // returns true`
-`isNaN(undefined)      // returns true`
+```javascript
+isNaN(NaN)            // returns true
+isNaN('abc')          // returns true
+isNaN(undefined)      // returns true
+```
 
 If you need to explicitly check whether a value is `NaN`, check if it is not-equal to itself.
 
@@ -162,7 +166,7 @@ The following will coerce to false:
 
 Because these values will coerce to `false`, they are said to be "falsey". Everything else will coerce to `true`, and is said to be "truthy".
 
-```
+```javascript
 if(someValue) {
   // This code will run if someValue is truthy
 } else {
@@ -172,8 +176,10 @@ if(someValue) {
 
 To check what boolean value a given value will coerce to, call the `Boolean` constructor as a function. Or prefix with `!!`.
 
-`Boolean({})        // returns true`
-`!!{}               // returns true`
+```javascript
+Boolean({})        // returns true
+!!{}               // returns true
+```
 
 ### Number
 
@@ -187,9 +193,10 @@ Everything else coerces to `NaN`.
 
 To check what boolean value a given value will coerce to, call the `Number` constructor as a function. Or subtract 0.
 
-`Number('5')          // returns 5`
-`'5' - 0              // returns 5`
-
+```javascript
+Number('5')          // returns 5
+'5' - 0              // returns 5
+```
 
 ### String
 
@@ -204,8 +211,7 @@ To check what boolean value a given value will coerce to, call the `Number` cons
 
 To check what boolean value a given value will coerce to, call the `Number` constructor as a function. Or add ''.
 
-`String(6)         // returns '6'`
-`6 + ''            // returns '6'`
-
-
-
+```javascript
+String(6)         // returns '6'
+6 + ''            // returns '6'
+```
