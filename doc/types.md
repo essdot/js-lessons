@@ -227,7 +227,7 @@ String(6)         // returns '6'
 
 `Number` and `String` are constructors. When you call them with `new`, they create `Number` or `String` objects.
 
-These objects object representations of primitive values -- they are *objects*, not primitive values. Howevever, they do contain an internal property that represents their primitive value. The `valueOf` method can be called to get that value. `valueOf` will also be used to coerce the object to its primitive value.
+These objects are object representations of primitive values -- they are *objects*, not primitive values. Howevever, they do contain an internal property that represents their primitive value. The `valueOf` method can be called to get that value. `valueOf` will also be used to coerce the object to its primitive value.
 
 ```javascript
 var numObj = new Number(5)
