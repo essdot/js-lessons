@@ -139,7 +139,9 @@ Here we check to see if `this` is what we are expecting -- an object whose const
 
 ## Bind
 
-A function's `bind` method takes a `this` value, and returns a new function. When the new function is called, it will execute the original function, with `this` set to the value passed to `bind`.
+"Binding" a function means to associate that function with a particular object. After a function is bound to an object, calling the function will run the function in the context of that object. So, inside the function, `this` refers to the object to which the function is bound.
+
+Functions have a method called `bind`, which performs this operation. `bind` accepts a `this` value as an argument and returns a new function. This new function is the original function, but bound to the `this` value that was passed in. So when this new function is called, `this` will always refer to the `this` value passed to `bind`, no matter how the function is invoked.
 
 ```javascript
 function myFunc() { return this.num }
@@ -149,7 +151,8 @@ myFunc()
 
 var myBoundFunc = myFunc.bind({num: 5})
 
-// returns 5
+// returns 5 - myBoundFunc is bound to
+// the object that was passed to bind
 myBoundFunc()
 
 ```
@@ -157,14 +160,19 @@ myBoundFunc()
 
 ### Partial Application
 
-`bind` can also be used to "partially apply" functions. This means that `bind` can pre-fill some of the function's arguments. When the new function is called, the pre-filled arguments will be combined with the current arguments and they will all be passed to the original function.
+`bind` can also be used to "partially apply" functions. This means that `bind` can pre-fill some of the function's arguments. When the new function is called, the pre-filled arguments will be combined with the current arguments and they will all be passed to the original function. 
+
 
 ```javascript
 function add3Nums(a, b, c) {
   return a + b + c
 }
 
+// pre-filling in the first argument, a, with the value 0
 var add2Nums = add3Nums.bind(null, 0)
+
+// pre-filling in the first two arguments, 
+// a with the value 0, and b with the value 7
 var add7 = add3Nums.bind(null, 0, 7)
 
 // returns 7
