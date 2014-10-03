@@ -215,3 +215,62 @@ To check what boolean value a given value will coerce to, call the `Number` cons
 String(6)         // returns '6'
 6 + ''            // returns '6'
 ```
+
+
+## Number() and String() constructors
+
+`Number` and `String` are constructors. When you call them with `new`, they create `Number` or `String` objects.
+
+These objects object representations of primitive values -- they are *objects*, not primitive values. Howevever, they do contain an internal property that represents their primitive value. The `valueOf` method can be called to get that value. `valueOf` will also be used to coerce the object to its primitive value.
+
+```javascript
+var numObj = new Number(5)
+var strObj = new String('abc')
+
+
+// returns true
+numObj instanceof Number
+
+// returns true
+numObj instanceof Object
+
+// returns true
+strObj instanceof String
+
+// returns true
+strObj instanceof Object
+
+
+// returns 5
+numObj.valueOf()
+
+// returns false - comparing identity
+numObj === 5
+
+// returns true - numObj is coerced to number primitive value & compared with 5
+numObj == 5
+
+```
+
+However, you can also call `Number` and `String` as regular functions. When you call them this way, they will coerce the argument to either a number or string primitive value, and return the coerced value.
+
+```javascript
+
+// returns 5
+Number('5')
+
+// returns 5
+Number(5)
+
+// returns NaN
+Number('abc')
+
+// returns '5'
+String(5)
+
+// returns 'abc'
+String('abc')
+
+// returns 'NaN'
+String(NaN)
+```
