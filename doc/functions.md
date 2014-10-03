@@ -209,7 +209,7 @@ This means that the following results in a syntax error:
 function myFunc() {}()
 ```
 
-The solution is to put anything before `function`, so that it is no longer a function statement but a function expression, which can be invoked directly.
+The solution is to put anything before `function`, so that the function statement becomes a function expression, which can be invoked directly.
 
 ```javascript
 // all valid
@@ -231,7 +231,8 @@ function myFunc() {}
 does this:
 
 ```javascript
-var myFunc = function myFunc() {}
+var myFunc 
+myFunc = function myFunc() {}
 ```
 
 ## Inner functions
@@ -248,11 +249,11 @@ function outerFunc() {
 
   innerFunc()
 }
-
+```
 
 ## Closures
 
-In Javascript, a function has access to everything in the scope in which it was created. Even after the lifetime of the outer function has passed, the inner function can still access and manipulate the variables in its enclosing scope. This is very powerful, and has many uses. It is also the only way to have truly private variables in Javascript.
+In Javascript, a function has access to everything in the scope in which it was created. Even after the outer function has finished running, the inner function can still access the variables in its enclosing scope. This is very powerful, and has many uses. It is also the only way to have truly private variables in Javascript.
 
 
 ```javascript
@@ -280,7 +281,7 @@ innerFunc()
 
 In the above example, `innerFunc` can see `x` and alter it, but outside code cannot.
 
-When a function is declared inside another function, the inner function is said to "close over" the scope of the outer function. This means that any variables in the outer scope, which are not re-declared in the inner scope, are avaiable.
+When a function is declared inside another function, the inner function is said to "close over" the scope of the outer function. This means that any variables in the outer scope, which are not re-declared in the inner scope, are available.
 
 However, any variable with a name that matches the name of a variable in the outer scope, will "shadow" the outer variable. The outer variable will not be available in the inner function.
 
