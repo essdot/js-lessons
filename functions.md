@@ -5,7 +5,7 @@ In Javascript, functions are objects. Unlike other JS objects, they are callable
 
 ## Arguments
 
-Functions can accept any number of arguments, and be called with any number of arguments. It is not an error to call a function with a different number of arguments than it is declared with. The unsupplied arguments will have a value of `undefined`.
+Functions can accept any number of arguments, and be called with any number of arguments. It is not an error to call a function with a different number of arguments than the function declares. The unsupplied arguments will have a value of `undefined`.
 
 ```
 function log3(first, second, third) {
@@ -18,7 +18,7 @@ function log3(first, second, third) {
 log3('a')
 ```
 
-Arguments in Javascript are always positional, there are no keyword args like in Python. However, a similar effect can be achieved by having a function accept an "options" object.
+Arguments in Javascript are always positional, there are no keyword args like in Python. However, a similar effect could be achieved by having a function accept an "options" object.
 
 In the body of a function, you can access `arguments`, which is an array-like object containing the arguments the function was called with, in order. This allows you to write functions that can accept any number of arguments:
 
