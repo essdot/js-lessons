@@ -9,3 +9,7 @@ Maybe you've used Javascript for years, or less than that, and want to dig into 
 I hope to explain these things in a way that makes you a better Javascript developer. Part of honing your skills is understanding the tools you use in depth.
 
 Disco! ✨🌐✨
+
+#### A note about style
+
+I don't use semicolons. Feel free to fork this repo and replace the examples with ones that match your stylistic preferences :)
