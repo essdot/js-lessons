@@ -1,0 +1,25 @@
+{
+  "name": "js-lessons",
+  "version": "0.0.0",
+  "description": "Lessons in Javascript",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/essdot/js-lessons.git"
+  },
+  "author": "Justin Sippel (https://github.com/essdot)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/essdot/js-lessons/issues"
+  },
+  "homepage": "https://github.com/essdot/js-lessons",
+  "dependencies": {
+    "mocha": "^1.21.4"
+  }
+}
