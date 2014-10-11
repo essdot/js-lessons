@@ -10,7 +10,7 @@ Javascript has the following types:
 6. object
 
 
-**THAT'S IT.**
+**THAT'S IT.**  
 The first five are primitives, they are passed by value. When you use them with the triple-equals operator, their values are compared. 
 
 There is only one value of type undefined. There is only one value of type null.
