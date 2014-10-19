@@ -79,7 +79,7 @@ The `{}` represents a new, empty object. To turn it into a string, its `toString
 
 ## Arrays
 
-Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prototype`. There are some slight differences between arrays other objects, to make it easier to work with them, but it's important to understand that arrays are really just objects.
+Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prototype`. There are some slight differences between arrays and other objects, to make it easier to work with them, but it's important to understand that arrays are really just objects.
 
 When you get or set an element of an array, you are doing the same thing as getting/setting a property of an object. The difference is that with an array, if you do things with properties whose keys are numbers, the `length` property will update itself, and vice versa.
 
