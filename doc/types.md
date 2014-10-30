@@ -17,13 +17,13 @@ There is only one value of type undefined. There is only one value of type null.
 
 Objects are passed by reference. When you use them with the triple-equals operator, their identities are compared. That means the triple-equals operator will only return `true` if both operands are the same object. That means that `{} === {}` will return `false`. The equality fails because even though they're really the same, they're two distinct objects.
 
-"But wait, what about arrays?"
+"But wait, what about arrays?"  
 Arrays are objects.
 
-"Well what about functions?"
+"Well what about functions?"  
 Functions are objects too!
 
-"But `typeof function() {}` returns 'function'."
+"But `typeof function() {}` returns 'function'."  
 Yes, that is true. Let's talk about `typeof`.
 
 ## The `typeof` Operator
