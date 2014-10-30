@@ -63,9 +63,11 @@ All objects descend from `Object.prototype`. The prototype of `Object.prototype`
 
 Objects' properties can be read and set with dot notation or bracket notation.
 
-`var myObj = {}`
-`myObj.foo = 5`
-`myObj['foo']   // returns 5`
+```javascript
+var myObj = {}
+myObj.foo = 5
+myObj['foo']   // returns 5
+```
 
 If you put something in the brackets that is not a string, it will be coerced into a string, and that will be used as the key.
 
@@ -73,9 +75,10 @@ If you put something in the brackets that is not a string, it will be coerced in
 
 The `{}` represents a new, empty object. To turn it into a string, its `toString()`method is called, which returns '[object Object]'. So this will set the property of `myObj` called "[object Object]" to the string 'hello'.
 
-`var name_of_key = '[object Object]'`
-`myObj[name_of_key] === 'hello'    // returns true`
-
+```javascript
+var name_of_key = '[object Object]'
+myObj[name_of_key] === 'hello'    // returns true
+```
 
 ## Arrays
 
@@ -83,17 +86,19 @@ Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prot
 
 When you get or set an element of an array, you are doing the same thing as getting/setting a property of an object. The difference is that with an array, if you do things with properties whose keys are numbers, the `length` property will update itself, and vice versa.
 
-`var arr = ['a', 'b', 'c']`
-`arr.length                    // returns 3`
-`arr['myProperty'] = 62`
-`arr[5] = 'z'                  // changes length of the array to 6`
-`arr.length                    // returns 6`
-`arr[2]                        // returns undefined`
-`arr[3]                        // returns undefined`
-`arr.length = 0                // clears out the array`
-`arr.toString()                // returns ''`
-`arr[0]                        // returns undefined`
-`arr['myProperty']             // still 62`
+```javascript
+var arr = ['a', 'b', 'c']
+arr.length                    // returns 3
+arr['myProperty'] = 62
+arr[5] = 'z'                  // changes length of the array to 6
+arr.length                    // returns 6
+arr[2]                        // returns undefined
+arr[3]                        // returns undefined
+arr.length = 0                // clears out the array
+arr.toString()                // returns ''
+arr[0]                        // returns undefined
+arr['myProperty']             // still 62
+```
 
 The array prototype defines a bunch of useful methods like `indexOf`, and they are wonderful. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too. Remember: arrays are just objects.
 
