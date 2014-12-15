@@ -65,18 +65,18 @@ When we call a function by itself, we may say that the function is "unbound" - i
 
 When you call an unbound function, `this` is equal to the global object. (In a browser, it will be `window`. In node, it will be `global`.)
 
-Except in strict mode -- in strict mode, `this` will be `undefined`. This is an attempt to remedy one of the worst design flaws of JS.
+Except in strict mode -- in strict mode, `this` will be `undefined`. This feature of strict mode is an attempt to remedy one of JavaScript's worst design flaws.
 
 
 ### Calling as a method
 
-If a function is a property of an object, we may say the function is "bound" to the object. When we call the function as a member of the object, we are calling the function as a "method" of that object, and the function will execute in the context of that object. So, inside the function, `this` will refer to the object that the function is a property of.
+If a function is a property of an object, we may say the function is a "method" of the object. When we call a function as a member of an object, we may say the function is "bound" to that object, and the function will execute in the context of that object. So, inside the function, `this` will refer to the object that the function is a property of.
 
 The same function can be used as a method of an object, and as a plain function:
 
 ```javascript
 var myObj = {}
-var myFunc = function () {`
+var myFunc = function () {
 var myObj.myMethod = myFunc
 myObj.myMethod()         // inside myMethod, this will be myObj
 myFunc()                 // inside myFunc, this will be the global object
