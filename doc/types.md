@@ -45,7 +45,7 @@ The rules are as follows -- you might not agree with them! In fact you might thi
 2. If the operand's type is string, return 'string'.
 3. If the operand's type is boolean, return 'boolean'.
 
-Good so far, right? Strap in, here we go.
+   Good so far, right? Strap in, here we go.
 
 4. If the operand's type is null, return 'object'. (What????)
 5. If the operand's type is object, and the operand can be called, return 'function'. (Functions are just objects that can be called. But 'function' is not a type.)
@@ -54,7 +54,7 @@ Good so far, right? Strap in, here we go.
 
 *(You can see the full definition of `typeof` in [the ECMAScript 5 spec, section 11.4.3.](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.3))*
 
-The point here isn't that `typeof` sucks. (It does kinda suck, though.) The point is just that it can lead you astray when trying to understand JS types.
+The point here isn't that `typeof` sucks. (It does kinda suck, though.) The point is just that it can lead you astray when trying to understand JS types. As an exercise, you could try writing a small library that returns the correct type of any value it's given. Try including functions that check whether something is an array, or a function, or NaN.
 
 
 ## Objects
