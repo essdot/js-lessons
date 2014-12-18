@@ -223,7 +223,7 @@ x.name === 'myFunc'
 var y = function() {}    
 ```
 
-When an exception is thrown inside a function, the function's name will appear in the stack trace. This is why you should get in the habit of naming your functions -- it makes it much easier to tell where the problem is.
+When an exception is thrown inside a function, the function's name will appear in the stack trace. This is why you should get in the habit of naming your functions -- it makes it much easier to tell where problems are happening in your code.
 
 Names are also needed for recursion. If you need to call your function from within itself, you should name it.
 
