@@ -112,7 +112,7 @@ myFunction.call(thisValue, arg1, arg2, arg3...)
 
 Using `apply` looks like this: 
 ```javascript
-myFunction.apply(thisValue, [argumentsArray])`
+myFunction.apply(thisValue, [argumentsArray])
 ```
 
 ```javascript
