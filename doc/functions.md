@@ -1,11 +1,27 @@
 # Functions
 
-In Javascript, functions are objects. Unlike other JS objects, they are callable. 
+In Javascript, functions are objects:
+
+```javascript
+var myObj = {}
+var myFunc = function myFunc() {}
+
+myObj instanceof Object // => true
+myFunc instanceof Object // => true
+myFunc instanceof Function // => true
+```
+
+Unlike other JS objects, functions are callable:
+
+```javascript
+myFunc()
+myObj() // => TypeError: object is not a function
+```
 
 
 ## Arguments
 
-Functions can accept any number of arguments, and be called with any number of arguments. It is not an error to call a function with a different number of arguments than the function declares. The unsupplied arguments will have a value of `undefined`.
+Functions can accept any number of arguments, and be called with any number of arguments. It is not an error to call a function with a different number of arguments than the function declares. If you provide fewer arguments than the function declares, the unsupplied arguments will have a value of `undefined`. 
 
 ```javascript
 function log3(first, second, third) {
@@ -18,9 +34,9 @@ function log3(first, second, third) {
 log3('a')
 ```
 
-Arguments in Javascript are always positional, there are no keyword args like in Python. However, a similar effect could be achieved by having a function accept an "options" object.
+Arguments in Javascript are always positional, there are no keyword args like in Python. (However, a similar effect could be achieved by having a function accept an "options" object whose properties are arguments.)
 
-In the body of a function, you can access `arguments`, which is an array-like object containing the arguments the function was called with, in order. This allows you to write functions that can accept any number of arguments:
+If a function is called with more arguments than it declares, the extra values will be available in the `arguments` object. `arguments` is an array-like object containing the arguments the function was called with, in order. This allows you to write functions that can accept any number of arguments:
 
 ```javascript
 function sum() {
@@ -91,7 +107,7 @@ myFunc()                 // inside myFunc, this will be the global object
 
 Using `call` looks like this: 
 ```javascript
-`myFunction.call(thisValue, arg1, arg2, arg3...)`
+myFunction.call(thisValue, arg1, arg2, arg3...)
 ```
 
 Using `apply` looks like this: 
