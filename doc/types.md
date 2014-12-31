@@ -135,31 +135,24 @@ myFunc['foo']   // returns 5
 
 There is only one number type in Javascript. Many other languages distinguish between decimal numbers and integers. Many other languages offer different levels of precision for floats and integers, or unsigned types. But Javascript just has the number type. 
 
-The number type represents the set of all possible number values, plus some special values: `NaN`, `Infinity`, and `-Infinity`.
-
-```javascript
-1 / 0         // returns Infinity
--1 / 0        // returns -Infinity
-0 / 0         // returns NaN
-5 - 'abc'     // returns NaN
-```
-
-Any arithmetic operation that attempts to use a non-number value which can't be coerced into a number will result in `NaN`.
+The number type represents the set of all possible number values, plus some special values: `NaN`, `Infinity`, and `-Infinity`. Any arithmetic operation that attempts to use a non-number value which can't be coerced into a number will result in `NaN`.
 
 
 ### NaN
 
 `NaN` is a value. Its type is number. `NaN` is the only value in Javascript that is not equal to itself. `NaN === NaN` is false.
 
-Be careful with the built-in `isNaN()` function. Its job is to tell you whether the value *would coerce to NaN*. This is different from telling you whether the value *is NaN*. 
+Be careful with the built-in `isNaN()` function. Its job is to tell you whether the value you pass to it *would coerce to NaN*. This is different from telling you whether the value *is the value NaN*. 
 
 ```javascript
 isNaN(NaN)            // returns true
 isNaN('abc')          // returns true
 isNaN(undefined)      // returns true
+isNaN(null)           // returns false
 ```
 
 If you need to explicitly check whether a value is `NaN`, check if it is not-equal to itself.
+
 
 ### Infinity
 
@@ -280,50 +273,28 @@ These are object representations of primitive values -- they are *objects*, not 
 var numObj = new Number(5)
 var strObj = new String('abc')
 
+numObj instanceof Number              // returns true
+numObj instanceof Object              // returns true
+strObj instanceof String              // returns true
+strObj instanceof Object              // returns true
 
-// returns true
-numObj instanceof Number
-
-// returns true
-numObj instanceof Object
-
-// returns true
-strObj instanceof String
-
-// returns true
-strObj instanceof Object
+numObj.valueOf()                      // returns 5
+numObj === 5                          // returns false - comparing identity
 
 
-// returns 5
-numObj.valueOf()
-
-// returns false - comparing identity
-numObj === 5
-
-// returns true - numObj is coerced to number primitive value & compared with 5
-numObj == 5
-
+numObj == 5                           // returns true
+                                      // numObj is coerced to number value & compared with 5
 ```
 
 However, you can also call `Number` and `String` as regular functions. When you call them this way, they will coerce the argument to either a number or string primitive value, and return the coerced value.
 
 ```javascript
 
-// returns 5
-Number('5')
+Number('5')                       // returns 5
+Number(5)                         // returns 5
+Number('abc')                     // returns NaN
 
-// returns 5
-Number(5)
-
-// returns NaN
-Number('abc')
-
-// returns '5'
-String(5)
-
-// returns 'abc'
-String('abc')
-
-// returns 'NaN'
-String(NaN)
+String(5)                         // returns '5'
+String('abc')                     // returns 'abc'
+String(NaN)                       // returns 'NaN'
 ```
