@@ -1,6 +1,6 @@
 # Types
 
-Javascript has the following types:
+Javascript (as of ES5) has the following types:
 
 1. string
 2. number
@@ -8,8 +8,6 @@ Javascript has the following types:
 4. undefined
 5. null
 6. object
-
-(If you're reading this sometime in the future, ES6 also has a Symbol type.)
 
 
 **THAT'S IT.**  
