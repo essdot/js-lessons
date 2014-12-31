@@ -86,9 +86,9 @@ Other things like numbers are coerced into strings too.
 
 ### Arrays
 
-Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prototype`. There are some slight differences between arrays and other objects, to make it easier to work with them, but it's important to understand that arrays are really just objects.
+Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prototype`. There are some slight differences between arrays and other objects, which JS provides to make arrays easier to work with. But it's important to understand that arrays are really just objects.
 
-When you get or set an element of an array, you are doing the same thing as getting/setting a property of an object. The difference is that with an array, if you do things with properties whose keys are numbers, the `length` property will update itself, and vice versa.
+When you get or set an element of an array, you are doing the same thing as getting/setting a property of any object. The difference is that with an array, if you do things with properties whose keys are numbers, the `length` property will update itself, and vice versa.
 
 ```javascript
 var arr = ['a', 'b', 'c']
@@ -104,7 +104,7 @@ arr[0]                        // returns undefined
 arr['myProperty']             // still 62
 ```
 
-The Array prototype defines a bunch of useful methods like `indexOf`, and they are wonderful. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too. Remember: arrays are just objects.
+The Array prototype defines some useful methods like `indexOf`, which come in handy. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too. Remember: arrays are just objects.
 
 
 ### Functions
