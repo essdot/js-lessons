@@ -49,7 +49,7 @@ The rules are as follows -- you might not agree with them! In fact you might thi
 
 4. If the operand's type is null, return 'object'. (What????)
 5. If the operand's type is object, and the operand can be called, return 'function'. (Functions are just objects that can be called. But 'function' is not a type.)
-6. If the operand is a built-in (native) object, and it can't be called, return 'object'.
+6. If the operand is a built-in object (native to the JS engine), and it can't be called, return 'object'.
 7. If the operand is an object which is not built-in, and it can't be called, return anything except 'undefined', 'boolean', 'number', and 'string'. (This is meant to be implementation-specific, but as far as I am aware all implementations return 'object'.)
 
 *(You can see the full definition of `typeof` in [the ECMAScript 5 spec, section 11.4.3.](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.3))*
@@ -59,7 +59,7 @@ The point here isn't that `typeof` sucks. (It does kinda suck, though.) The poin
 
 ## Objects
 
-All objects descend from `Object.prototype`. The prototype of `Object.prototype` is `null`. You can get an object's prototype by using the built-in function `Object.getPrototypeOf()`.
+All objects descend from `Object.prototype`. The prototype of `Object.prototype` is `null`. You can get an object's prototype by using the built-in function `Object.getPrototypeOf(obj)`.
 
 Objects' properties can be read and set with dot notation or bracket notation.
 
@@ -71,7 +71,9 @@ myObj['foo']   // returns 5
 
 If you put something in the brackets that is not a string, it will be coerced into a string, and that will be used as the key.
 
-`myObj[{}] = 'hello'`
+```javascript
+myObj[{}] = 'hello'
+```
 
 The `{}` represents a new, empty object. To turn it into a string, its `toString()`method is called, which returns '[object Object]'. So this will set the property of `myObj` called "[object Object]" to the string 'hello'.
 
@@ -79,6 +81,8 @@ The `{}` represents a new, empty object. To turn it into a string, its `toString
 var name_of_key = '[object Object]'
 myObj[name_of_key] === 'hello'    // returns true
 ```
+
+Other things like numbers are coerced into strings too.
 
 ## Arrays
 
@@ -89,7 +93,7 @@ When you get or set an element of an array, you are doing the same thing as gett
 ```javascript
 var arr = ['a', 'b', 'c']
 arr.length                    // returns 3
-arr['myProperty'] = 62
+arr.myProperty = 62
 arr[5] = 'z'                  // changes length of the array to 6
 arr.length                    // returns 6
 arr[2]                        // returns undefined
@@ -100,7 +104,7 @@ arr[0]                        // returns undefined
 arr['myProperty']             // still 62
 ```
 
-The array prototype defines a bunch of useful methods like `indexOf`, and they are wonderful. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too. Remember: arrays are just objects.
+The Array prototype defines a bunch of useful methods like `indexOf`, and they are wonderful. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too. Remember: arrays are just objects.
 
 
 ## Functions
