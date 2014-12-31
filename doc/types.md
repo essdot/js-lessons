@@ -229,7 +229,7 @@ Boolean({})        // returns true
 * `false` will coerce to 0.
 * `true` will coerce to 1.
 * If a string can be parsed as a number, it will coerce to that number's value.
-* If an object's `toString()` results in a string that can be parsed as a number, the object will coerce to that number. This includes arrays.
+* If an object's `valueOf()` results in a number, or its `toString()` results in a string that can be parsed as a number, the object will coerce to that number. This includes arrays.
 
 Everything else coerces to `NaN`.
 
@@ -248,7 +248,7 @@ Number('abc')        // returns NaN
 * `true` coerces to 'true'
 * `false` coerces to 'false'
 * numbers coerce to a string representation of the number (this includes `Infinity` and `NaN`)
-* Objects coerce to the result of calling `toString()`. `Array.prototype.toString()` returns the elements of the array separated by commas.
+* Objects coerce to the result of calling `toString()`, or failing that, the result of calling `valueOf()`.
 
 To coerce a value to a string, call the `String` constructor as a function, or add ''. If the value is an object, you can call its `toString()` method.
 
@@ -260,7 +260,7 @@ String([1, 2, 3]) // returns '1,2,3'
 
 ### Coercing objects to primitive types
 
-JavaScript uses an object's `toString()` and `valueOf()` methods to coerce to primitive values. Since `Object.prototype` defines a `toString()` method, almost every object should have a `toString()` method. Objects created with the `Number` and `Boolean` constructors will have `valueOf()` methods. (Keep in mind that you can define these methods yourself on any object you like.)
+JavaScript uses an object's `toString()` and `valueOf()` methods to coerce to primitive values. Since `Object.prototype` defines a `toString()` method, almost every object should have a `toString()` method. Objects created with the `Number` and `Boolean` constructors will have `valueOf()` methods. However, keep in mind that you can define these methods yourself on any object you like, and JS will use them during coercion.
 
 When JS is attempting to coerce an object to a number or boolean value, the result of the `valueOf()` method will be preferred. If `valueOf()` is not present, `toString()` will be called, and its value will then be coerced into the number or boolean.
 
