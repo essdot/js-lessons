@@ -9,6 +9,8 @@ Javascript has the following types:
 5. null
 6. object
 
+(If you're reading this sometime in the future, ES6 also has a Symbol type.)
+
 
 **THAT'S IT.**  
 The first five are primitives, they are passed by value. When you use them with the triple-equals operator, their values are compared. 
