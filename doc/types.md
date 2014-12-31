@@ -54,7 +54,7 @@ The rules are as follows -- you might not agree with them! In fact you might thi
 
 *(You can see the full definition of `typeof` in [the ECMAScript 5 spec, section 11.4.3.](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.3))*
 
-The point here isn't that `typeof` sucks. (It does kinda suck, though.) The point is just that it can lead you astray when trying to understand JS types. As an exercise, you could try writing a small library that returns the correct type of any value it's given. Try including functions that check whether something is an array, or a function, or NaN.
+The point here isn't that `typeof` sucks. (It does kinda suck, though.) The point is just that it can lead you astray when trying to understand JS types. As an exercise, you could try writing a small library thatfor determining the types of values. Try including functions that check whether something is an array, or a function, or NaN.
 
 
 ## Objects
@@ -84,7 +84,7 @@ myObj[name_of_key] === 'hello'    // returns true
 
 Other things like numbers are coerced into strings too.
 
-## Arrays
+### Arrays
 
 Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prototype`. There are some slight differences between arrays and other objects, to make it easier to work with them, but it's important to understand that arrays are really just objects.
 
@@ -107,7 +107,7 @@ arr['myProperty']             // still 62
 The Array prototype defines a bunch of useful methods like `indexOf`, and they are wonderful. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too. Remember: arrays are just objects.
 
 
-## Functions
+### Functions
 
 Functions are objects. Their constructor is `Function`. Their prototype is `Function.prototype`. But functions have a very special attribute that other objects do not: they can be called. In the ECMAScript spec, they are said to be "Callable".
 
@@ -120,9 +120,9 @@ myObj()    // TypeError: object is not a function
 
 You can call a function by using the function-call operator, the two parentheses, as above. You can also use `call` or `apply`. You can also use `new`.
 
-Functions have a `length` property too. It represents the number of arguments the function accepts.
+Functions have a `length` property too. It represents the number of arguments the function defines.
 
-But again, functions are objects. You can set properties on them just like other objects.
+As I mentioned, functions are objects. You can set properties on them just like other objects.
 
 ```javascript
 var myFunc = function() {}
@@ -133,9 +133,9 @@ myFunc['foo']   // returns 5
 
 ## Numbers
 
-There is only one number type in Javascript. Many other languages distinguish between decimal numbers and integers. Many other languages offer different levels of precision for floats and integers, or unsigned types. But Javascript just has the number type.
+There is only one number type in Javascript. Many other languages distinguish between decimal numbers and integers. Many other languages offer different levels of precision for floats and integers, or unsigned types. But Javascript just has the number type. 
 
-When dealing with numbers in Javascript, you need to watch out for `NaN` and `Infinity`. 
+The number type represents the set of all possible number values, plus some special values: `NaN`, `Infinity`, and `-Infinity`.
 
 ```javascript
 1 / 0         // returns Infinity
@@ -147,7 +147,7 @@ When dealing with numbers in Javascript, you need to watch out for `NaN` and `In
 Any arithmetic operation that attempts to use a non-number value which can't be coerced into a number will result in `NaN`.
 
 
-## NaN
+### NaN
 
 `NaN` is a value. Its type is number. `NaN` is the only value in Javascript that is not equal to itself. `NaN === NaN` is false.
 
@@ -160,6 +160,34 @@ isNaN(undefined)      // returns true
 ```
 
 If you need to explicitly check whether a value is `NaN`, check if it is not-equal to itself.
+
+### Infinity
+
+Infinity is a special number value that simply represents the positive value infinity. If you add values to it, divide it, etc, the result will be `Infinity`. There is also a `-Infinity` value, which represents the value of negative infinity, and acts similarly. `Infinity` and `-Infinity` occur in cases of overflow.
+
+`Infinity` and `-Infinity` may not behave as you expect in some cases.
+
+```javascript
+var x = Infinity
+var y = -Infinity
+
+x / 2                     // returns Infinity
+x + 1                     // returns Infinity
+x / x                     // returns NaN
+
+y + 5                     // returns -Infinity
+y / y                     // returns NaN
+
+x / y                     // returns NaN
+x - y                     // returns Infinity
+x + y                     // returns NaN
+x * y                     // returns -Infinity
+
+Number.MAX_VALUE          // returns 1.7976931348623157e+308
+Number.MAX_VALUE * 2      // returns Infinity
+
+```
+
 
 
 ## Type Coercion
