@@ -163,7 +163,7 @@ If you need to explicitly check whether a value is `NaN`, check if it is not-equ
 
 ### Infinity
 
-Infinity is a special number value that simply represents the positive value infinity. If you add values to it, divide it, etc, the result will be `Infinity`. There is also a `-Infinity` value, which represents the value of negative infinity, and acts similarly. `Infinity` and `-Infinity` occur in cases of overflow.
+`Infinity` is a special number value that simply represents the positive value infinity. If you add values to it, divide it, etc, the result will be `Infinity`. There is also a `-Infinity` value, which represents the value of negative infinity, and acts similarly. `Infinity` and `-Infinity` occur in cases of overflow.
 
 `Infinity` and `-Infinity` may not behave as you expect in some cases.
 
@@ -194,12 +194,10 @@ Number.MAX_VALUE * 2      // returns Infinity
 
 Type coercion is the process of converting a value from one type to another type, so that the converted value can be used in some particular way. For example, if you try to subtract a string from a number, the string must be coerced into a number before the subtraction can be performed. If the string cannot be coerced into a number, it will be coerced into `NaN`, and the result of the subtraction will be `NaN`.
 
-JS type coercion is a bit crazy. There's a lot to it, and it often bites JS programmers, experts included.
-
 
 ### Boolean
 
-The following will coerce to false:
+The following will coerce to `false`:
 
 * `undefined`
 * `null`
@@ -249,7 +247,7 @@ Number('abc')        // returns NaN
 * null coerces to 'null'
 * `true` coerces to 'true'
 * `false` coerces to 'false'
-* numbers coerce to a string representation of the number (this includes Infinity and NaN)
+* numbers coerce to a string representation of the number (this includes `Infinity` and `NaN`)
 * Objects coerce to the result of calling `toString()`. `Array.prototype.toString()` returns the elements of the array separated by commas.
 
 To coerce a value to a string, call the `String` constructor as a function, or add ''. If the value is an object, you can call its `toString()` method.
@@ -260,12 +258,23 @@ String(6)         // returns '6'
 String([1, 2, 3]) // returns '1,2,3'
 ```
 
+### Coercing objects to primitive types
+
+JavaScript uses an object's `toString()` and `valueOf()` methods to coerce to primitive values. Since `Object.prototype` defines a `toString()` method, almost every object should have a `toString()` method. Objects created with the `Number` and `Boolean` constructors will have `valueOf()` methods. (Keep in mind that you can define these methods yourself on any object you like.)
+
+When JS is attempting to coerce an object to a number or boolean value, the result of the `valueOf()` method will be preferred. If `valueOf()` is not present, `toString()` will be called, and its value will then be coerced into the number or boolean.
+
+When JS is attempting to coerce an object to a string, the result of `toString()` will be preferred. If `toString()` is not present, the result of `valueOf()` will be coerced into a string.
+
+If the object has neither `toString()` nor `valueOf()`, the coercion will fail and a TypeError will be thrown.
+
+
 
 ## Number() and String() constructors
 
 `Number` and `String` are constructors. When you call them with `new`, they create `Number` or `String` objects.
 
-These objects are object representations of primitive values -- they are *objects*, not primitive values. Howevever, they do contain an internal property that represents their primitive value. The `valueOf` method can be called to get that value. `valueOf` will also be used to coerce the object to its primitive value.
+These are object representations of primitive values -- they are *objects*, not primitive values. Howevever, they do contain an internal property that represents their primitive value. The `valueOf` method can be called to get that value. `valueOf` will also be used to coerce the object to its primitive value.
 
 ```javascript
 var numObj = new Number(5)
