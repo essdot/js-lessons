@@ -59,7 +59,7 @@ The point here isn't that `typeof` sucks. (It does kinda suck, though.) The poin
 
 ## Objects
 
-All objects descend from `Object.prototype`. The prototype of `Object.prototype` is `null`. You can get an object's prototype by using the built-in function `Object.getPrototypeOf(obj)`.
+All objects descend from `Object.prototype`. The prototype of `Object.prototype` is `null`. You can get an object's prototype by calling the `Object.getPrototypeOf(obj)`.
 
 Objects' properties can be read and set with dot notation or bracket notation.
 
@@ -104,7 +104,7 @@ arr[0]                        // returns undefined
 arr['myProperty']             // still 62
 ```
 
-The Array prototype defines some useful methods like `indexOf`, which come in handy. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too. Remember: arrays are just objects.
+The Array prototype defines some useful methods like `indexOf`, which come in handy. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too, if you want. Remember: arrays are (mostly) just objects.
 
 
 ### Functions
@@ -118,7 +118,7 @@ myFunc()
 myObj()    // TypeError: object is not a function
 ```
 
-You can call a function by using the function-call operator, the two parentheses, as above. You can also use `call` or `apply`. You can also use `new`.
+Syntactically, you can call a function in two ways: using the function call operator, the two parentheses, or by using `new`.
 
 Functions have a `length` property too. It represents the number of arguments the function defines.
 
@@ -133,12 +133,12 @@ myFunc['foo']   // returns 5
 
 ## Numbers
 
-There is only one number type in Javascript. Many other languages distinguish between decimal numbers and integers. Many other languages offer different levels of precision for floats and integers, or unsigned types. But Javascript just has the number type. 
+There is only one number type in JavaScript. Many other languages distinguish between decimal numbers and integers. Many other languages offer different levels of precision for floats and integers, or unsigned types. But JavaScript just has the Number type. 
 
-The number type represents the set of all possible number values, plus some special values: `NaN`, `Infinity`, and `-Infinity`. Any arithmetic operation that attempts to use a non-number value which can't be coerced into a number will result in `NaN`.
+The number type represents the set of possible number values, plus some special values: `NaN`, `Infinity`, and `-Infinity`. Any arithmetic operation that attempts to use a non-number value which can't be coerced into a number will result in `NaN`.
 
 
-### NaN
+### NaN (Not a Number)
 
 `NaN` is a value. Its type is number. `NaN` is the only value in Javascript that is not equal to itself. `NaN === NaN` is false.
 
@@ -156,7 +156,7 @@ If you need to explicitly check whether a value is `NaN`, check if it is not-equ
 
 ### Infinity
 
-`Infinity` is a special number value that simply represents the positive value infinity. If you add values to it, divide it, etc, the result will be `Infinity`. There is also a `-Infinity` value, which represents the value of negative infinity, and acts similarly. `Infinity` and `-Infinity` occur in cases of overflow.
+`Infinity` is a special number value that represents the positive value infinity. If you add values to it, divide it, etc, the result will be `Infinity`. There is also a `-Infinity` value, which represents the value of negative infinity, and acts similarly. `Infinity` and `-Infinity` can occur in cases of overflow.
 
 `Infinity` and `-Infinity` may not behave as you expect in some cases.
 
@@ -234,6 +234,19 @@ Number('abc')        // returns NaN
 '5' - 0              // returns 5
 ```
 
+To parse a string into a number, use `parseInt` or `parseFloat`. Remember that JavaScript only has one number type -- the names of these two built-in functions refer to the argument passed to each function, not the return values. If the numeric string you're passing has a decimal point, use `parseFloat`, otherwise use `parseInt`. If the string cannot be parsed into a number value, `parseInt` and `parseFloat` return `NaN`.
+
+`parseFloat` takes only one parameter, the string to be parsed. `parseInt` takes an optional radix parameter, because it can parse integers in any base from 2 (binary) to 36. This includes binary, octal, and decimal and hexidecimal representations. You should always supply this parameter to avoid any ambiguity in the parsing.
+
+
+```javascript
+parseInt('a', 16)              // returns 10
+parseInt('a', 10)              // returns NaN
+
+parseInt('9', 10)              // returns 9
+parseInt('9', 8)               // returns NaN
+```
+
 ### String
 
 * undefined coerces to 'undefined'
@@ -246,9 +259,11 @@ Number('abc')        // returns NaN
 To coerce a value to a string, call the `String` constructor as a function, or add ''. If the value is an object, you can call its `toString()` method.
 
 ```javascript
-String(6)         // returns '6'
-6 + ''            // returns '6'
-String([1, 2, 3]) // returns '1,2,3'
+String(6)                 // returns '6'
+6 + ''                    // returns '6'
+
+String([1, 2, 3])         // returns '1,2,3'
+[1, 2, 3].toString()      // returns '1,2,3'
 ```
 
 ### Coercing objects to primitive types
