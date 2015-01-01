@@ -280,9 +280,7 @@ strObj instanceof Object              // returns true
 
 numObj.valueOf()                      // returns 5
 numObj === 5                          // returns false - comparing identity
-
-
-numObj == 5                           // returns true
+numObj == 5                           // returns true:
                                       // numObj is coerced to number value & compared with 5
 ```
 
