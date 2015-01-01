@@ -32,7 +32,7 @@ The `typeof` operator is poorly named: it does not tell you the type of
 its operand. At least, not always. `typeof` can still be useful, but you should be aware that it can lie to you.
 
 ```javascript
-typeof null    // returns 'object'
+typeof null      // returns 'object'
 ```
 
 See? The type of `null` is null. Not object.
@@ -78,8 +78,8 @@ myObj[{}] = 'hello'
 The `{}` represents a new, empty object. To turn it into a string, its `toString()`method is called, which returns '[object Object]'. So this will set the property of `myObj` called "[object Object]" to the string 'hello'.
 
 ```javascript
-var name_of_key = '[object Object]'
-myObj[name_of_key] === 'hello'    // returns true
+var name_of_key = ({}).toString()      // '[object Object]'
+myObj[name_of_key] === 'hello'         // returns true
 ```
 
 Other things like numbers are coerced into strings too.
@@ -95,6 +95,7 @@ var arr = ['a', 'b', 'c']
 arr.length                    // returns 3
 arr.myProperty = 62
 arr[5] = 'z'                  // changes length of the array to 6
+arr['5']                      // returns 'z'
 arr.length                    // returns 6
 arr[2]                        // returns undefined
 arr[3]                        // returns undefined
