@@ -239,7 +239,6 @@ To parse a string into a number, use `parseInt` or `parseFloat`. Remember that J
 
 `parseFloat` takes only one parameter, the string to be parsed. `parseInt` takes an optional radix parameter, because it can parse integers in any base from 2 (binary) to 36. This includes binary, octal, and decimal and hexidecimal representations. You should always supply this parameter to avoid any ambiguity in the parsing.
 
-
 ```javascript
 parseInt('a', 16)              // returns 10
 parseInt('a', 10)              // returns NaN
@@ -247,6 +246,7 @@ parseInt('a', 10)              // returns NaN
 parseInt('9', 10)              // returns 9
 parseInt('9', 8)               // returns NaN
 ```
+
 
 ### String
 
