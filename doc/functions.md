@@ -436,5 +436,4 @@ replaceIt(o)
 // It has not been replaced.
 ```
 
-The line `o = myNewObj` simply *rebinds* the variable `o` to a new value, the value of `myNewObj`. It is not replacing the reference to the object that was passed in to `replaceIt`.
-
+The line `o = myNewObj` simply *rebinds* the variable `o` in the body of `replaceIt` to a new value, a reference to `myNewObj`. It is not replacing the reference to the object that was passed in to `replaceIt`. After `replaceIt` has finished running, `o` still refers to the same object with no properties.
