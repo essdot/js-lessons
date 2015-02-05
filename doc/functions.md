@@ -49,11 +49,9 @@ function sum() {
   return result
 }
 
-// returns 5
-sum(2, 5)
-
-// returns 4
-sum(1, 1, 1, 1)
+sum()                // returns 0
+sum(2, 5)            // returns 7
+sum(1, 1, 1, 1)      // returns 4
 ```
 
 Use `arguments` in a read-only way, do not try to manipulate its contents. If you need to do that sort of thing, make a copy of it first. But since `arguments` is  not really an array, you have to get a little creative:
@@ -77,6 +75,8 @@ The main difference between the ways to call a function is the value of the `thi
 
 ### Calling as a function
 
+`func()`
+
 When we call a function by itself, we may say that the function is "unbound" - it is not associated with any particular object.
 
 When you call an unbound function, `this` is equal to the global object. (In a browser, it will be `window`. In node, it will be `global`.)
@@ -85,6 +85,8 @@ Except in strict mode -- in strict mode, `this` will be `undefined`. This featur
 
 
 ### Calling as a method
+
+`obj.method()`
 
 If a function is a property of an object, we may say the function is a "method" of the object. When we call a function as a member of an object, we may say the function is "bound" to that object, and the function will execute in the context of that object. So, inside the function, `this` will refer to the object that the function is a property of.
 
@@ -101,9 +103,12 @@ myFunc()                 // inside myFunc, this will be the global object
 
 ### Calling with `call` or `apply`
 
-`call` and `apply` are functions that call a function with a given `this` value, plus arguments.
+`func.call(thisValue, arg1, arg2, arg3)`
+`func.apply(thisValue, [arg1, arg2, arg3])`
 
-`call` and `apply` are much the same, the only difference is in how you provide the arguments. If you're using `apply`, the arguments are in an array. If you're using `call`, you pass the arguments directly.
+`call` and `apply` are functions that call a function with a given `this` value, plus arguments. They are methods of each function object, because they are members of `Function.prototype`.
+
+`call` and `apply` do the same thing, the only difference is in how you provide the arguments. If you're using `apply`, the arguments are in an array, so `apply` accepts a total of 2 arguments. If you're using `call`, you pass the arguments directly, so `call` can take any number of arguments.
 
 Using `call` looks like this: 
 ```javascript
@@ -127,6 +132,8 @@ add3NumsToThis.apply(6, [1, 1, 1])    // returns 9
 
 
 ### Calling with `new`
+
+`new MyClass()`
 
 `new` is an operator that takes a function as an operand. It creates an object and then invokes the function in the context of the newly-created object. Functions that are intended to be called with `new` are called constructors, and by convention the function's name should be capitalized.
 
@@ -230,7 +237,7 @@ Names are also needed for recursion. If you need to call your function from with
 
 ## Function statements & expressions
 
-Syntactically, Javascript has two ways of expressing functions: the function statement and the function expression. By the rules of Javascript parsing, if the first token in a statement is `function`, it is a function statement. Otherwise it is a function expression.
+Syntactically, Javascript has two ways of expressing functions: the function statement and the function expression. By the rules of JavaScript's syntax, if the first token in a statement is `function`, it is a function statement. Otherwise it is a function expression.
 
 A function expression evaluates to the function. A function statement, on the other hand, does not. So function statements cannot be directly invoked.
 
