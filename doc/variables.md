@@ -146,10 +146,10 @@ Here's what the function looks like after hoisting:
 
 ```
 function myFunc() {
-  var x
+  var x       // hoisted - declaring the variable named x
 
   if(false) {
-    x = 5
+    x = 5     // assigning the value 5 to x
   }
 }
 ```
@@ -187,4 +187,4 @@ function myFunc() {
 }
 ```
 
-Just to drive the point home one last time, always declare your variables at the top of the function, no matter where they are used within the function. Whoever has to read your code later will thank you.
+Just to drive the point home one last time, always declare your variables at the top of the function, no matter where they are used within the function. Hoisting can come in handy but it can be clunky too!
