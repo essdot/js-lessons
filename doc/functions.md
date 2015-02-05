@@ -311,15 +311,15 @@ function outerFunc() {
 var inner = outerFunc()
 
 // logs 6
-innerFunc()
+inner()
 
 // logs 7
-innerFunc()
+inner()
 ```
 
 In the above example, `innerFunc` can see `x` and alter it, but outside code cannot.
 
-When a function is declared inside another function, the inner function is said to "close over" the scope of the outer function. This means that any variables in the outer scope, which are not re-declared in the inner scope, are available.
+When a function is declared inside another function, the inner function is said to "close over" the scope of the outer function. This means that any variables in the outer scope, which are not re-declared in the inner scope, are available while the inner function runs.
 
 However, any variable with a name that matches the name of a variable in the outer scope, will "shadow" the outer variable. The outer variable will not be available in the inner function.
 
@@ -396,7 +396,7 @@ console.log(x)
 
 ```
 
-If an object is passed into a function, it is not copied. The function receives a reference to the object. However, the reference itself cannot be altered. This is important! 
+If an object is passed into a function, it is not copied. Instead, the function receives a copy of the *reference* to the object.
 
 The state inside the object can be mutated: properties of the object can be deleted, or replaced, or new properties added to the object. After the function returns, those changes will still be there:
 
@@ -425,7 +425,7 @@ function replaceIt(o) {
     func: function() {}
   }
 
-  o = newObj
+  o = myNewObj
 }
 
 var o = {}
@@ -436,5 +436,5 @@ replaceIt(o)
 // It has not been replaced.
 ```
 
-The line `o = newObj` simply *rebinds* the variable `o` to a new value, the value of `newObj`. It is not replacing the reference to the object that was passed in to `replaceIt`.
+The line `o = myNewObj` simply *rebinds* the variable `o` to a new value, the value of `myNewObj`. It is not replacing the reference to the object that was passed in to `replaceIt`.
 

@@ -64,10 +64,11 @@ If you think "the JS engine silently rewrites your code" sounds like a recipe fo
 
 Recall from the "Functions" lesson that a function statement includes a variable declaration. This means that function statements will also be hoisted to the top of a function. 
 
-Let's look at some code. In this function, even though the declaration of `x` is in the middle of the function body, `x` can be used throughout the function:
+In this function, even though the declaration of `x` is in the middle of the function body, `x` can be used throughout the function:
 
 ```
 function myFunc() {
+  //`var x` is hoisted up to here when myFunc runs
   x = {}
   x.num = 7
   console.log(x)
@@ -126,7 +127,6 @@ function myFunc() {
 
   x = 5
   myInnerFunc()
-  
 }
 ```
 
