@@ -15,7 +15,7 @@ The first five are primitives, they are passed by value. When you use them with 
 
 There is only one value of type undefined. There is only one value of type null.
 
-Objects are passed by reference. When you use them with the triple-equals operator, their identities are compared. That means the triple-equals operator will only return `true` if both operands are the same object. That means that `{} === {}` is false. The equality fails because they are two distinct objects.
+Objects are passed by reference. When you use them with the triple-equals operator, their identities are compared. That means the triple-equals operator will only return `true` if both operands are the same object. That means that `{} === {}` is false. The equality fails because they are two distinct ## .
 
 "But wait, what about arrays?"  
 Arrays are objects.
@@ -58,8 +58,6 @@ The point here isn't that `typeof` sucks. (It does kinda suck, though.) The poin
 
 
 ## Objects
-
-All objects descend from `Object.prototype`. The prototype of `Object.prototype` is `null`. You can get an object's prototype by calling the `Object.getPrototypeOf(obj)`.
 
 Objects' properties can be read and set with dot notation or bracket notation.
 
@@ -189,7 +187,7 @@ Number.MAX_VALUE * 2      // returns Infinity
 Type coercion is the process of converting a value from one type to another type, so that the converted value can be used in some particular way. For example, if you try to subtract a string from a number, the string must be coerced into a number before the subtraction can be performed. If the string cannot be coerced into a number, it will be coerced into `NaN`, and the result of the subtraction will be `NaN`.
 
 
-### Boolean
+### Coercing to boolean
 
 The following will coerce to `false`:
 
@@ -217,15 +215,14 @@ Boolean({})        // returns true
 !!''               // returns false
 ```
 
-### Number
+### Coercing to number
 
 * `null` will coerce to 0
 * `false` will coerce to 0.
 * `true` will coerce to 1.
 * If a string can be parsed as a number, it will coerce to that number's value.
 * If an object's `valueOf()` results in a number, or its `toString()` results in a string that can be parsed as a number, the object will coerce to that number. This includes arrays.
-
-Everything else coerces to `NaN`.
+* Everything else coerces to `NaN`.
 
 To coerce a value to a number, call the `Number` constructor as a function, or subtract 0.
 
@@ -248,7 +245,7 @@ parseInt('9', 8)               // returns NaN
 ```
 
 
-### String
+### Coercing to string
 
 * undefined coerces to 'undefined'
 * null coerces to 'null'
