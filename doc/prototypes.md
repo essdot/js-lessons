@@ -224,6 +224,6 @@ The important parts are the `Object.create` call, and `Super.call(this)`. `Super
 
 As you can see, doing this is a bit clunky in JavaScript. Sometimes it's the right thing, but you should consider whether what you're building really needs this sort of inheritance. 
 
-## __proto__
+## \_\_proto\_\_
 
-Some JavaScript engines *do* give you a way to directly access an object's link to its prototype, by putting a `__proto__` property on every object. This is not enforced by the ECMAScript spec, and you should not rely on it being there. But it might be!
+Some JavaScript engines *do* give you a way to directly access an object's link to its prototype, by giving every object a  `__proto__` property. This is not standard, it's not enforced by the ECMAScript spec, and you should not rely on it being there. But it might be!
