@@ -48,7 +48,7 @@ car.honkHorn()                 // logs 'beep'
 sportsCar.honkHorn()           // logs 'HONK!!!'
 ```
 
-Above we see that setting `sportsCar.hornSound`, will not change or remove `car.hornSound`. When an object has a property with the same name as a property of the prototype, we may say it is *shadowing* the prototype's property. Here, `sportsCar.hornSound` is shadowing `car.hornSound`.
+Above we see that setting `sportsCar.hornSound` will not change or remove `car.hornSound`. When an object has a property with the same name as a property of the prototype, we may say it is *shadowing* the prototype's property. Here, `sportsCar.hornSound` is shadowing `car.hornSound`.
 
 The `hasOwnProperty` method will return `true` only if the object has the property itself. You can use this to figure out if a property is coming from the prototype chain or the object itself.
 
@@ -186,7 +186,7 @@ function factory() {
 }
 ```
 
-Here, the `factory` function does what we're looking for in a constructor - it creates and returns an object with properties we want. And we avoid the pitfalls of `new`, and we're not locked in for the future. Later, if we decide that `factory` should return an object from an internal pool of objects, we can make that change and it won't affect users of `factory` at all.
+Here, the `factory` function does what we're looking for in a constructor - it creates and returns an object with properties we want. And we avoid the pitfalls of `new`, and we're not locked in for the future. Later, if we decide that `factory` should return an object from an internal pool of objects, instead of creating a new one every time, we can make that change and it won't affect users of `factory` at all.
 
 ## `instanceof` operator
 
