@@ -7,11 +7,11 @@ Javascript (as of ES5) has the following types:
 3. boolean
 4. undefined
 5. null
-6. object
-
+6. symbol
+7. object
 
 **THAT'S IT.**  
-The first five are primitives, they are passed by value. When you use them with the triple-equals operator, their values are compared. 
+The first six are primitives, they are passed by value. When you use them with the triple-equals operator, their values are compared. 
 
 There is only one value of type undefined. There is only one value of type null.
 
@@ -42,15 +42,16 @@ OK, so if `typeof` isn't intended to reliably tell us the actual type of its ope
 The rules are as follows -- you might not agree with them! In fact you might think some of them are silly.
 
 1. If the operand's type is undefined, return 'undefined'.
-2. If the operand's type is string, return 'string'.
-3. If the operand's type is boolean, return 'boolean'.
+2. If the operand's type is boolean, return 'boolean'.
+3. If the operand's type is string, return 'string'.
+4. If the operand's type is symbol, return 'symbol'.
 
    Good so far, right? Strap in, here we go.
 
-4. If the operand's type is null, return 'object'. (What????)
-5. If the operand's type is object, and the operand can be called, return 'function'. (Functions are just objects that can be called. But 'function' is not a type.)
-6. If the operand is a built-in object (native to the JS engine), and it can't be called, return 'object'.
-7. If the operand is an object which is not built-in, and it can't be called, return anything except 'undefined', 'boolean', 'number', and 'string'. (This is meant to be implementation-specific, but as far as I am aware all implementations return 'object'.)
+5. If the operand's type is null, return 'object'. (What????)
+6. If the operand's type is object, and the operand can be called, return 'function'. (Functions are just objects that can be called/invoked. But 'function' is not a type.)
+7. If the operand is a built-in object (native to the JS engine), and it can't be called, return 'object'.
+8. If the operand is an object which is not built-in, and it can't be called, return anything except 'undefined', 'boolean', 'number', 'symbol' or 'string'. (This is meant to be implementation-specific, but as far as I am aware all implementations return 'object'.)
 
 *(You can see the full definition of `typeof` in [the ECMAScript 5 spec, section 11.4.3.](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.3))*
 
@@ -312,3 +313,36 @@ String(5)                         // returns '5'
 String('abc')                     // returns 'abc'
 String(NaN)                       // returns 'NaN'
 ```
+
+## Symbols
+
+Symbols were added in ES6, and they are another primitive type. The only non-primitive type is `object`. Symbols are immutable, like strings, but they are all not equivalent to each other, like objects.
+
+Symbols can be used as object property keys. Normally, a value used as a property key would be coerced to a string before retrieving or setting that property of the object.
+
+But when you use a symbol as the key for a property of an object, that property can only be retrieved by using the same symbol again. Properties of an object that use symbols as their key will not be iterated over by `Object.keys`. Instead, the new `Object.getOwnPropertySymbols` function can get a list of symbols used as property keys for an object.
+
+
+```javascript
+const myObj = {}
+const mySymbol = Symbol('cool')
+
+// logs []
+console.log(Object.keys(myObj))
+
+myObj[mySymbol] = 'sup'
+
+// still logs []
+console.log(Object.keys(myObj))
+
+// logs 'sup'
+console.log(myObj[mySymbol])
+
+// logs Symbol(cool)
+console.log(Object.getOwnPropertySymbols(myObj))
+```
+
+
+## Symbol() function
+
+The `Symbol` function can create new symbol values. It is not a constructor and should not be called with `new`. Each time `Symbol` is called, it creates a new value, so calling it twice with the same argument will result in two symbol values which are not equivalent.
