@@ -136,10 +136,14 @@ There is only one number type in JavaScript. Many other languages distinguish be
 
 The number type represents the set of possible number values, plus some special values: `NaN`, `Infinity`, and `-Infinity`. Any arithmetic operation that attempts to use a non-number value which can't be coerced into a number will result in `NaN`.
 
+There are no `int`-type whole numbers in JavaScript. But if you want to ensure that you have a whole number value, you can use `Math.floor` and `Math.ceil`. `Math.floor` will round down to the next lowest integer, and `Math.ceil` will round up to the next highest integer.
+
 
 ### NaN (Not a Number)
 
-`NaN` is a value. Its type is number. `NaN` is the only value in Javascript that is not equal to itself. `NaN === NaN` is false.
+`NaN` is a value. Its type is number. `NaN` is the only value in JavaScript that is not equal to itself. `NaN === NaN` is false.
+
+`NaN` is the value that results when you try to perform a mathematical operation that is invalid, like subtracting a string from a number or dividing a number by an object. (However, both of those are possible if the non-number value can be coerced to a number!)
 
 Be careful with the built-in `isNaN()` function. Its job is to tell you whether the value you pass to it *would coerce to NaN*. This is different from telling you whether the value *is the value NaN*. 
 
@@ -160,20 +164,20 @@ If you need to explicitly check whether a value is `NaN`, check if it is not-equ
 `Infinity` and `-Infinity` may not behave as you expect in some cases.
 
 ```javascript
-var x = Infinity
-var y = -Infinity
+var inf = Infinity
+var negInf = -Infinity
 
-x / 2                     // returns Infinity
-x + 1                     // returns Infinity
-x / x                     // returns NaN
+inf / 2                   // returns Infinity
+inf + 1                   // returns Infinity
+inf / inf                 // returns NaN
 
-y + 5                     // returns -Infinity
-y / y                     // returns NaN
+negInf + 5                // returns -Infinity
+negInf / negInf           // returns NaN
 
-x / y                     // returns NaN
-x - y                     // returns Infinity
-x + y                     // returns NaN
-x * y                     // returns -Infinity
+x / negInf                // returns NaN
+x - negInf                // returns Infinity
+x + negInf                // returns NaN
+x * negInf                // returns -Infinity
 
 Number.MAX_VALUE          // returns 1.7976931348623157e+308
 Number.MAX_VALUE * 2      // returns Infinity
@@ -244,7 +248,6 @@ parseInt('9', 10)              // returns 9
 parseInt('9', 8)               // returns NaN
 ```
 
-
 ### Coercing to string
 
 * undefined coerces to 'undefined'
@@ -274,8 +277,6 @@ When JS is attempting to coerce an object to a string, the result of `toString()
 
 If the object has neither `toString()` nor `valueOf()`, the coercion will fail and a TypeError will be thrown.
 
-
-
 ## Number() and String() constructors
 
 `Number` and `String` are constructors. When you call them with `new`, they create `Number` or `String` objects.
@@ -300,7 +301,6 @@ numObj == 5                           // returns true:
 However, you can also call `Number` and `String` as regular functions. When you call them this way, they will coerce the argument to either a number or string primitive value, and return the coerced value.
 
 ```javascript
-
 Number('5')                       // returns 5
 Number(5)                         // returns 5
 Number('abc')                     // returns NaN

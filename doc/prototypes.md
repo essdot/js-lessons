@@ -23,7 +23,7 @@ let sportsCar = Object.create(car)
 Object.getPrototypeOf(sportsCar) === car    // => true
 ```
 
-My new `sportsCar` object will get the `honkHorn` function for free:
+The `sportsCar` object will get the `honkHorn` function for free:
 
 ```javascript
 typeof car.honkHorn               // => 'function'
