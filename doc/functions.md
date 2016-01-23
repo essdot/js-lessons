@@ -67,7 +67,7 @@ function initConfig (configPath = '/some/path/to/config') {
 }
 
 initConfig()                     // use default path value
-initConfig('/some/other/path') // override default
+initConfig('/some/other/path')   // override default
 
 ```
 
@@ -243,7 +243,7 @@ add7(4)
 
 ## "Fat arrow" syntax
 
-The "fat arrow" (`=>`) syntax for defining functions was added in ES6. Using it is shorter than `function`, and mostly equivalent. However, when you declare a function in fat-arrow syntax, its scope is *lexically bound*. More on that in a moment.
+The "fat arrow" (`=>`) syntax for defining functions was added in ES6. Using it is shorter than `function`, and mostly equivalent. However, when you declare a function in fat-arrow syntax, it is *lexically bound*. More on that in a moment.
 
 Parentheses should surround the list of arguments for the function being defined, but if there is only one argument, you can omit the parentheses.
 
@@ -293,7 +293,7 @@ innerFunc2()
 innerFunc2.call(obj1)
 ```
 
-Here, we call `outerFunc` in the context of each object, `obj1` and `obj2`. Each time `outerFunc` is called, the `innerArrowFunc` gets re-defined and bound to the context of the `outerFunc`. So when the `innerArrowFunc` is called, it runs in the same context as `outerFunc` when it was defined.
+Here, we call `outerFunc` in the context of each object, `obj1` and `obj2`. Each time `outerFunc` is called, `innerArrowFunc` gets re-defined and bound to the context of the `outerFunc`. So when the `innerArrowFunc` is called, it runs in the same context as `outerFunc` when it was defined.
 
 
 ## Function Names
@@ -313,7 +313,7 @@ const y = function () {}
 
 When an exception is thrown inside a function, the function's name will appear in the stack trace. This is why you should get in the habit of naming your functions -- it makes it much easier to tell where problems are happening in your code.
 
-Names are also needed for recursion. If you need to call your function from within itself, you should name it.
+Names are also needed for recursion; if you need to call a function inside its body it has to have a name.
 
 
 ## Function statements & expressions
@@ -469,9 +469,9 @@ changeIt(x)
 console.log(x)
 ```
 
-However, if an object is passed into a function, it is not copied. Instead, the function receives a copy of the *reference* to the object.
+However, if an object is passed into a function, the object is not copied. Instead, the function receives a copy of the *reference* to the object.
 
-The state inside the object can be mutated: properties of the object can be deleted, or replaced, or new properties added to the object (unless the object is sealed or frozen). After the function returns, those changes will still be there:
+The function will be able to mutate the object: properties of the object can be deleted, or replaced, or new properties added to the object (unless the object is sealed or frozen). After the function returns, those changes will still be there:
 
 ```javascript
 function changeIt(o) {
@@ -509,4 +509,4 @@ replaceIt(o)
 // It has not been replaced.
 ```
 
-The line `o = myNewObj` simply *rebinds* the variable `o` in the body of `replaceIt` to a new value, the reference to `myNewObj`. It is not altering the reference to the object that was passed in to `replaceIt`. After `replaceIt` has finished running, `o` still refers to the same object as before `replaceIt` was called.
+The line `o = myNewObj` simply *rebinds* the variable `o` in the body of `replaceIt` to a new value: the reference to `myNewObj`. It is not altering the reference to the object that was passed in to `replaceIt`. After `replaceIt` has finished running, `o` still refers to the same object as before `replaceIt` was called.
