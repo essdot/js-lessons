@@ -161,7 +161,7 @@ Previously you'd have to use `apply` in this case, but the spread operator allow
 
 `new MyClass()`
 
-`new` is an operator that takes a function as an operand. It creates an object and then invokes the function in the context of the newly-created object. Functions that are intended to be called with `new` are called constructors, and by convention the function's name should begin with a capital letter.
+`new` is an operator that takes a function as an operand. The `new` operator creates a new object and then invokes the function in the context of the new object. Functions that are intended to be called with `new` are called constructors, and by convention the function's name should begin with a capital letter.
 
 ```javascript
 // constructor for Customer objects
@@ -243,7 +243,7 @@ add7(4)
 
 ## "Fat arrow" syntax
 
-The "fat arrow" (`=>`) syntax for defining functions was added in ES6. Using it is shorter than `function`, and mostly equivalent. However, when you declare a function in fat-arrow syntax, it is *lexically bound*. More on that in a moment.
+The "fat arrow" (`=>`) syntax for defining functions was added in ES6. Using it is shorter than `function`, and mostly equivalent. However, when you declare a function in fat-arrow syntax, it is *lexically bound*. More on that in a moment. Also, functions declared with the arrow syntax are always anonymous.
 
 Parentheses should surround the list of arguments for the function being defined, but if there is only one argument, you can omit the parentheses.
 
@@ -328,15 +328,14 @@ This means that the following results in a syntax error:
 function myFunc () {} ()
 ```
 
-The solution is to put anything before `function`, so that the function statement becomes a function expression, which can be invoked directly.
+The solution is to put anything before `function`, so that the first token is not `function`. Then the function statement becomes a function expression, which can be invoked directly. A set of parentheses around the function is commonly used.
 
 ```javascript
 // all valid
 (function myFunc () {})()
-+function myFunc () {} ()
--function myFunc () {} ()
-!function myFunc () {} ()
 ```
+
+This is sometimes called an "IIFE", immediately-invoked function expression.
 
 
 ### Function statements
@@ -372,8 +371,7 @@ function outerFunc () {
 
 ## Closures
 
-In JavaScript, a function has access to everything in the scope in which it was created. Even after the outer function has finished running, the inner function can still access the variables in its enclosing scope. This is very powerful, and has many uses. It is also the only way to have truly private variables in JavaScript.
-
+In JavaScript, a function has access to everything in the scope in which it was created. Even after the outer function has finished running, the inner function can still access the variables in its enclosing scope. This is very powerful, and has many uses. For example, it is the only way to have truly private variables in JavaScript.
 
 ```javascript
 function outerFunc () {
@@ -402,7 +400,7 @@ In the above example, `innerFunc` can see `x` and alter it, but outside code can
 
 When a function is declared inside another function, the inner function is said to "close over" the scope of the outer function. This means that any variables in the outer scope, which are not re-declared in the inner scope, are available while the inner function runs.
 
-However, any variable with a name that matches the name of a variable in the outer scope, will "shadow" the outer variable. The outer variable will not be available in the inner function.
+However, any variable declared in the inner scope with the same name as a variable in the outer scope, will "shadow" the outer variable. The outer variable will not be available in the inner function.
 
 
 ```javascript
@@ -450,7 +448,6 @@ inner()
 // logs 5
 inner(5)
 ```
-
 
 ## Pass by reference & pass by value
 
