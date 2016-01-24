@@ -1,5 +1,0 @@
---check-leaks
---require test-lib/node-test-prepare.js
---reporter spec
-
-test
