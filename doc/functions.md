@@ -115,22 +115,14 @@ myFunc()                 // inside myFunc, this will be the global object
 
 ### Calling with `call` or `apply`
 
-`func.call(thisValue, arg1, arg2, arg3)`
-`func.apply(thisValue, [arg1, arg2, arg3])`
+```javascript
+func.call(thisValue, arg1, arg2, arg3)
+func.apply(thisValue, [arg1, arg2, arg3])
+```
 
 `call` and `apply` are functions that call a function with a given `this` value, plus arguments. They are methods of each function object, because they are members of `Function.prototype`.
 
 `call` and `apply` do the same thing, the only difference is in how you provide the arguments. If you're using `apply`, the arguments are in an array, so `apply` accepts a total of 2 arguments. If you're using `call`, you pass the arguments directly, so `call` can take any number of arguments.
-
-Using `call` looks like this: 
-```javascript
-myFunction.call(thisValue, arg1, arg2, arg3...)
-```
-
-Using `apply` looks like this: 
-```javascript
-myFunction.apply(thisValue, [argumentsArray])
-```
 
 ```javascript
 function add3NumsToThis(a, b, c) {
@@ -155,7 +147,7 @@ interestingOperation(...myValues)
 
 ```
 
-Previously you'd have to use `apply` in this case, but the spread operator allows our code to be a little nicer and more expressive in this circumstance.
+Before ES6, you'd have to use `apply` in this case, but the spread operator allows our code to be a little nicer and more expressive here.
 
 ### Calling with `new`
 
@@ -195,7 +187,7 @@ Here we check to see if `this` is what we are expecting -- an object whose const
 
 ## Bind
 
-"Binding" a function means to associate that function with a particular object. After a function is bound to an object, calling the function will run the function in the context of that object. So, inside the function, `this` refers to the object to which the function is bound.
+"Binding" a function means to associate that function with a particular object. After a function is bound to an object, calling the function will run the function in the context of that object. So, inside the function, `this` refers to the object the function is bound to.
 
 Remember how functions are objects? Function-objects have a method called `bind`, which performs this operation. `bind` accepts a `thisValue` as an argument and returns a new function. This new function is the original function, but bound to the `this` value that was passed in. So when the new function is called, `this` will always refer to the `thisValue` passed to `bind`, no matter how the function is invoked.
 
