@@ -1,19 +1,19 @@
 # Prototypes & Inheritance
 
-Inheritance works differently in JavaScript than in many other languages. JavaScript uses *prototypal inheritance*, which is focused on objects themselves, not classes. There are no classes in JavaScript, at least not in the same way as you may be used to in Java or C++ or other object-oriented languages.
+Inheritance works differently in JavaScript than in many other languages. JavaScript uses *prototypal inheritance*, which is focused on objects themselves, not classes. There are no classes in JavaScript, at least not in the same way as you may be used to in Java or C++ or other object-oriented languages. This is true even though JavaScript has a `class` keyword.
 
 # The Prototype Chain
 
 Every JavaScript object has an internal link to its *prototype*, the object that is its ancestor. When you ask for a property of an object in JavaScript, the object itself is checked first. If the property isn't there, the prototype is checked, and that object's prototype and so on, all the way to the end. What is the end of the chain? `Object.prototype`. Objects in JavaScript ultimately descend from `Object.prototype`. The prototype of `Object.prototype` is `null`.
 
-You can't directly access an object's internal link to its prototype. However, you can pass the object to the function `Object.getPrototypeOf()`, which will return a reference to the object's prototype. Also, you can pass an object to the function `Object.create()`, and the newly-created object will have the provided object as the prototype.
+You can't directly access an object's internal link to its prototype. However, you can pass the object to the function `Object.getPrototypeOf()`, which will return a reference to the object's prototype. You can pass an object to the function `Object.create()`, and it will create a new object that has the provided object as its prototype. You can use `Object.setPrototypeOf()` to change an object's prototype.
 
 This prototype chain allows objects to inherit from other objects, but without classes. Let's say I create an object called `car` and give it a `honkHorn` function, then make it the prototype of a `sportsCar` object:
 
 ```javascript
 let car = {
 	hornSound: 'beep',
-	honkHorn: function honkHorn() {
+	honkHorn: function honkHorn () {
 		console.log(this.hornSound)
 	}
 }
@@ -23,7 +23,7 @@ let sportsCar = Object.create(car)
 Object.getPrototypeOf(sportsCar) === car    // => true
 ```
 
-My new `sportsCar` object will get the `honkHorn` function for free:
+The `sportsCar` object will get the `honkHorn` function for free:
 
 ```javascript
 typeof car.honkHorn               // => 'function'
@@ -59,7 +59,7 @@ car.hasOwnProperty('honkHorn')           // => true
 sportsCar.hasOwnProperty('hornSound')    // => true
 ```
 
-`hasOwnProperty` is a property of `Object.prototype`, so by default, every object has the `hasOwnProperty` method.
+`hasOwnProperty` is a member of `Object.prototype`, so by default, every object has the `hasOwnProperty` method.
 
 ```javascript
 let myCoolObject = {
@@ -108,13 +108,13 @@ sportsCar.honkHorn()
 ```
 
 Note:
-You can create an object that has no prototype, by passing `null` to `Object.create`. It won't have any properties, even the properties that objects normally have like `toString` and `hasOwnProperty`.
+You can create an object that has no prototype, by passing `null` to `Object.create`. The resulting object will not have `Object.prototype` as its prototype, its prototype will be `null`. It won't have any properties, even the properties that objects normally have like `toString` and `hasOwnProperty`.
 
 # Constructors
 
 A *constructor* is a function that sets up a new object when it is created with the `new` operator. In JavaScript, any function can be used as a constructor, even if it was not intended to be used that way. There is nothing special to the language about constructor functions. Because of this, by convention, a function that is intended to be used as a constructor has a capitalized name. Never use a capitalized name for a variable or function name unless it is meant to be used as a constructor.
 
-Objects in JavaScript have a `constructor` property that points to their constructor function. The default constructor is `Object`, if you create an object via an object literal or `Object.create`, its constructor will be `Object`. Functions' constructor is `Function`, their prototype is `Function.prototype`. Date objects' constructor is `Date`, etc.
+Objects in JavaScript have a `constructor` property that points to their constructor function. The default constructor is `Object`. If you create an object via an object literal or `Object.create`, its constructor will be `Object`. Functions' constructor is `Function`, their prototype is `Function.prototype`. Date objects' constructor is `Date`, etc.
 
 Since any function can be a constructor, every function automatically has a `prototype` property. This is the object that will be the prototype of all objects created with that constructor.
 
@@ -139,7 +139,6 @@ Object.getPrototypeOf(Lightbulb.prototype) === Object.prototype
 
 It's very important to understand how this works: above, `Lightbulb.prototype` is *not* the prototype of `Lightbulb`. `Lightbulb.prototype` is the prototype of *all objects constructed by Lightbulb*. `Lightbulb` is a function, so its prototype is `Function.prototype`. The prototype of `Lightbulb.prototype` is `Object.prototype`.
 
-
 ## `new` operator
 
 Constructors are functions that are intended to be invoked with the `new` operator. The `new` operator tells JavaScript to create a new object, and then invoke the constructor function. In the constructor, `this` will refer to the newly-created object.
@@ -156,8 +155,8 @@ If you call a constructor without `new`, `this` will refer to the global object.
 There is a bit of boilerplate you can add to a constructor to make sure this doesn't happen:
 
 ```javascript
-function MyCoolConstructor() {
-	if(!(this instanceof MyCoolConstructor)) {
+function MyCoolConstructor () {
+	if (!(this instanceof MyCoolConstructor)) {
 		return new MyCoolConstructor()
 	}
 }
@@ -176,12 +175,12 @@ So there are downsides to using `new`, and yet, we already have other ways to cr
 ```javascript
 let proto = {
 	myProp: '1234',
-	hello: function() {
+	hello: function () {
 		console.log('hi')
 	}
 }
 
-function factory() {
+function factory () {
 	return Object.create(proto)
 }
 ```
@@ -197,15 +196,18 @@ Here, the `factory` function does what we're looking for in a constructor - it c
 
 # "Subclassing"
 
-You can use JavaScript's prototype inheritance to simulate OO-style subclass inheritance. Unfortunately, doing this is a bit clunky. To simulate subclassing, you set the "subclass" constructor's prototype to an object whose prototype is the prototype of the "super class", then you call the parent constructor in the context of the object being constructed:
+You can use JavaScript's prototype inheritance to simulate OO-style subclass inheritance. Unfortunately, doing this is a bit clunky. To simulate subclassing, you:
+
+1. set the "subclass" prototype to an object whose prototype is the "superclass" prototype. This link is what makes the "subclass" inherit from the "superclass" -- all the "subclass" objects descend from an object that descends from the "superclass".
+1. call the "superclass" constructor in the context of the object being constructed. This ensures that any setup that happens in the "superclass" constructor happens to the "subclass" objects too.
 
 ```javascript
 
-function Super() {
+function Super () {
 	this.isSubclass = false
 }
 
-function Sub() {
+function Sub () {
 	Super.call(this)
 
 	this.isSubclass = true
@@ -224,6 +226,48 @@ The important parts are the `Object.create` call, and `Super.call(this)`. `Super
 
 As you can see, doing this is a bit clunky in JavaScript. Sometimes it's the right thing, but you should consider whether what you're building really needs this sort of inheritance. 
 
-## \_\_proto\_\_
+## ES6 Classes
 
-Some JavaScript engines *do* give you a way to directly access an object's link to its prototype, by giving every object a  `__proto__` property. This is not standard, it's not enforced by the ECMAScript spec, and you should not rely on it being there. But it might be!
+ES6 adds some new syntax for declaring classes. The `class` keyword was added, and in between the curly braces defining the class, you can define methods, properties, and a constructor.
+
+```javascript
+class MyClass {
+	constructor () {
+		this.name = 'MyClass'
+	}
+	sayHi () {
+		return 'hi'
+	}
+	get name () {
+		return this.name
+	}
+}
+```
+
+The "class object" created by this keyword is simply the constructor function. Remember that all functions are objects.
+
+ES6 also gives the `extends` keyword to do subclassing. If you use `extends` to make a class inherit from another class, you need to use the `super` keyword to call the superclass constructor from the subclass constructor.
+
+```javascript
+
+class MySubclass extends MyClass {
+	constructor () {
+		super()
+
+		this.name = 'MySubclass'
+	}
+}
+```
+
+You can do "static methods" with the `static` keyword. This adds methods to the class itself rather than the class instances.
+
+```javascript
+class SomeClass {
+	static isCool () {
+		return true
+	}
+}
+
+//returns true
+SomeClass.isCool()
+```
