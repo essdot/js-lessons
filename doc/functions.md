@@ -58,7 +58,7 @@ sum(1, 1, 1, 1)      // returns 4
 
 ### Default arguments
 
-As of ES6, functions can declare default arguments, so that the variable can have a value inside the function even if one is not passed in.
+As of ES6, functions can declare default arguments, so that the argument can have a value inside the function even if one is not passed in.
 
 ```javascript
 
