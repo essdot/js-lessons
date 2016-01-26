@@ -166,11 +166,23 @@ function MyCoolConstructor () {
 
 This is why the convention of naming constructors with a capital letter is so important! Always do it, always always always.
 
+
+## `instanceof` operator
+
+`instanceof` takes two operands: an object on the left, and a function on the right. `instanceof` returns `true` if the function is the constructor of the object, or any object in the prototype chain.
+
+(Technically, it can take any value on the left side. But only objects have constructors, so if the left-hand value is not an object, it will return `false`.)
+
+
 ## You don't need `new`
 
-When you use the `new` operator, it forces the creation of a new object. If you decide later on that you don't want your function to be called that way, you're stuck. Your users are already calling it with `new`, you have to keep shipping a constructor or it will be a breaking change for your users. 
+When you use the `new` operator, it forces the creation of a new object. If you make a module that exports a constructor and then decide later on that you don't want your function to be called that way, you're stuck. Your users are already calling it with `new`, you have to keep shipping a constructor or it will be a breaking change for your users.
 
-So there are downsides to using `new`, and yet, we already have other ways to create objects. We have `Object.create` and we have the object-literal syntax, and they don't have the downsides that `new` does. So why do we need `new`? We don't! Think about not using it at all:
+Instead of exporting a constructor, you can just export a function that calls `new` itself if the functionality of your module is implemented in an object-oriented fashion.
+
+## Creating objects without `new`
+
+JavaScript has other ways to create objects: `Object.create` and the object-literal syntax. These can be used instead of constructors and `new`. `Object.create` creates a new object, and the new object's prototype is the argument you pass to `Object.create`.
 
 ```javascript
 let proto = {
@@ -185,18 +197,13 @@ function factory () {
 }
 ```
 
-Here, the `factory` function does what we're looking for in a constructor - it creates and returns an object with properties we want. And we avoid the pitfalls of `new`, and we're not locked in for the future. Later, if we decide that `factory` should return an object from an internal pool of objects, instead of creating a new one every time, we can make that change and it won't affect users of `factory` at all.
+Here, the `factory` function does what we're looking for in a constructor - it creates and returns an object with properties we want. When you call this function, you get a new object back. If the implementation of creating that object changes, it doesn't matter -- callers just care that they call the function and get an object back.
 
-## `instanceof` operator
-
-`instanceof` takes two operands: an object on the left, and a function on the right. `instanceof` returns `true` if the function is the constructor of the object, or any object in the prototype chain.
-
-(Technically, it can take any value on the left side. But only objects have constructors, so if the left-hand value is not an object, it will return `false`.)
-
+This is another way to create objects without constructors and `new`. With this way, notice how simple it is to create an object with a given prototype. Instead of setting the `prototype` property of a function and then calling the function with `new` (clumsy and error-prone), we just call `Object.create`. Keep this in mind when designing modules that create objects.
 
 # "Subclassing"
 
-You can use JavaScript's prototype inheritance to simulate OO-style subclass inheritance. Unfortunately, doing this is a bit clunky. To simulate subclassing, you:
+You can use JavaScript's prototypal inheritance to simulate OO-style subclass inheritance. Unfortunately, doing this is a bit clunky. To simulate subclassing, you:
 
 1. set the "subclass" prototype to an object whose prototype is the "superclass" prototype. This link is what makes the "subclass" inherit from the "superclass" -- all the "subclass" objects descend from an object that descends from the "superclass".
 1. call the "superclass" constructor in the context of the object being constructed. This ensures that any setup that happens in the "superclass" constructor happens to the "subclass" objects too.
@@ -244,7 +251,7 @@ class MyClass {
 }
 ```
 
-The "class object" created by this keyword is simply the constructor function. Remember that all functions are objects.
+The "class object" created by this keyword is simply the constructor function. Remember that all functions are objects. The "methods" and getters/setters you define will be added to the prototype.
 
 ES6 also gives the `extends` keyword to do subclassing. If you use `extends` to make a class inherit from another class, you need to use the `super` keyword to call the superclass constructor from the subclass constructor.
 
