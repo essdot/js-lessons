@@ -51,9 +51,9 @@ The rules are as follows -- you might not agree with them! In fact you might thi
 5. If the operand's type is null, return 'object'. (What????)
 6. If the operand's type is object, and the operand can be called, return 'function'. (Functions are just objects that can be called/invoked. But 'function' is not a type.)
 7. If the operand is a built-in object (native to the JS engine), and it can't be called, return 'object'.
-8. If the operand is an object which is not built-in, and it can't be called, return anything except 'undefined', 'boolean', 'number', 'symbol' or 'string'. (This is meant to be implementation-specific, but as far as I am aware all implementations return 'object'.)
+8. If the operand is an object which is not built-in, and it can't be called, return anything except 'undefined', 'boolean', 'function', 'number', 'symbol' or 'string'. (This is meant to be implementation-specific, but as far as I am aware all implementations return 'object'.)
 
-*(You can see the full definition of `typeof` in [the ECMAScript 5 spec, section 11.4.3.](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.3))*
+*(You can see the full definition of `typeof` in [the ECMAScript 6 spec, section 12.5.6.](http://www.ecma-international.org/ecma-262/6.0/#sec-typeof-operator))*
 
 The point here isn't that `typeof` sucks. (It does kinda suck, though.) The point is just that it can lead you astray when trying to understand JS types. As an exercise, you could try writing a small library for determining the types of values. Try including functions that check whether something is an array, or a function, or NaN.
 
@@ -89,7 +89,7 @@ Other things like numbers are coerced into strings too.
 
 Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prototype`. There are some slight differences between arrays and other objects, which JS provides to make arrays easier to work with. But it's important to understand that arrays are really just objects.
 
-When you get or set an element of an array, you are doing the same thing as getting/setting a property of any object. The difference is that with an array, if you do things with properties whose keys are numbers, the `length` property will update itself, and vice versa.
+When you get or set an element of an array, you are doing the same thing as getting/setting a property of any object. The difference is that with an array, if you set properties whose keys are numbers, the `length` property will update itself.
 
 ```javascript
 var arr = ['a', 'b', 'c']
@@ -122,7 +122,7 @@ myObj()    // TypeError: object is not a function
 
 Syntactically, you can call a function in two ways: using the function call operator, the two parentheses, or by using `new`.
 
-Functions have a `length` property too. It represents the number of arguments the function defines.
+Functions have a `length` property. It represents the number of arguments the function defines.
 
 As I mentioned, functions are objects. You can set properties on them just like other objects.
 
@@ -131,7 +131,6 @@ var myFunc = function() {}
 myFunc.foo = 5
 myFunc['foo']   // returns 5
 ```
-
 
 ## Numbers
 
