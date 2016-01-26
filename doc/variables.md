@@ -14,7 +14,7 @@ You must declare a variable before you use it. Declare variables with the `let` 
 
 The above statement actually breaks down into two:
 
-```javascriot
+```javascript
 let x
 x = 5
 ```
@@ -28,6 +28,19 @@ If you assign to a variable without declaring it with `let` first, Javascript wi
 // Never, never, never ever do this, ever.
 function myFunc () {
   x = 5
+}
+
+//This is okay though:
+function outerFunc () {
+  let x = 2
+  
+  innerFunc()
+  
+  function innerFunc () {
+    // since x is not declared in innerFunc,
+    // x refers to the x from the enclosing scope.
+    x = 7
+  }
 }
 ```
 
