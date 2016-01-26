@@ -251,12 +251,11 @@ class MyClass {
 }
 ```
 
-The "class object" created by this keyword is simply the constructor function. Remember that all functions are objects. The "methods" and getters/setters you define will be added to the prototype.
+The "class object" created by this keyword is simply the constructor function. (Remember that all functions are objects!) The "methods" and getters/setters you define will be added to the prototype.
 
 ES6 also gives the `extends` keyword to do subclassing. If you use `extends` to make a class inherit from another class, you need to use the `super` keyword to call the superclass constructor from the subclass constructor.
 
 ```javascript
-
 class MySubclass extends MyClass {
 	constructor () {
 		super()
@@ -266,7 +265,7 @@ class MySubclass extends MyClass {
 }
 ```
 
-You can do "static methods" with the `static` keyword. This adds methods to the class itself rather than the class instances.
+You can do "static methods" with the `static` keyword. This adds methods to the class itself (that is, the class constructor function object) rather than the class instances (via the prototype).
 
 ```javascript
 class SomeClass {
