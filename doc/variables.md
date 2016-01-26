@@ -14,8 +14,10 @@ You must declare a variable before you use it. Declare variables with the `let` 
 
 The above statement actually breaks down into two:
 
-`let x`
-`x = 5`
+```javascriot
+let x
+x = 5
+```
 
 If you declare a variable without initializing its value, the value of the variable will be `undefined`.
 
