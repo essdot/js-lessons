@@ -1,6 +1,6 @@
 # Types
 
-Javascript (as of ES5) has the following types:
+Javascript (as of ES6) has the following types:
 
 1. string
 2. number
