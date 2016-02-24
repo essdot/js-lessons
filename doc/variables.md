@@ -4,7 +4,9 @@ Variables in JavaScript are not restricted to a single type, they can have any v
 
 As of ES6, variables can be declared with `var` or `let`. If you are using ES6, you should always use `let` and not `var`. There is no reason to use `var` (again, assuming you're in ES6), so just don't use `var`, and always use `let`.
 
-Also as of ES6, you can declare constants with `const`. If you need to name a value that won't change, declare it as a constant with `const`.
+(The reason is that `var` sometimes behaves in unexpected ways, and `let` doesn't. In software, if you have a choice between a thing that will surprise you sometimes, and a thing that won't surprise you, choose the thing that won't surprise you.)
+
+Also as of ES6, you can declare constants with `const`. If you need to name a value that won't change, declare it as a constant with `const`. Anything that isn't supposed to change should always be declared with `const`, and not `let` or `var`.
 
 ## Declaration
 
@@ -30,7 +32,7 @@ function myFunc () {
   x = 5
 }
 
-//This is okay though:
+// But this is okay:
 function outerFunc () {
   let x = 2
   
@@ -44,13 +46,13 @@ function outerFunc () {
 }
 ```
 
-The exception to this is strict mode. In strict mode, the above will be an error. This is an attempt to remedy one of JavaScript's biggest design flaws. It's a nasty one.
+The exception to this is strict mode. In strict mode, trying to use an undeclared variable is an error. This is an attempt to remedy one of JavaScript's biggest design flaws. It's a nasty one.
 
 **Always, always declare variables with `let`.**
 
 ## Block scope
 
-Variables declared with `let` have "block scope". This means that a variable is only visible within the block (set of curly braces) in which it was defined. If you declare a variable with `let` inside an if-block, the variable will not be visible outside of the if-block.
+Variables declared with `let` have "block scope". This means that a variable is only visible within the block (set of curly braces) in which it was defined. If you declare a variable with `let` inside an if-block, for example, the variable will not be visible outside of the if-block.
 
 Constants also have block scope.
 
@@ -148,7 +150,7 @@ You can see how, due to hoisting, the declaration will run, but the assignment w
 Remember that in JavaScript:
 
 * Variables declared with `var` have function scope -- they can be seen everywhere within the function.
-* `var` declarations are hoisted to the top of the function. This includes inner functions defined in the function.
+* `var` declarations are hoisted to the top of the function. Inner function declarations are also hoised to the top of the function.
 
 (Although you should not use `var` to declare variables, and use `let` instead, you will have to read code that uses `var`. It was around for much longer than `let` and `const`. So you need to understand hoisting.)
 
