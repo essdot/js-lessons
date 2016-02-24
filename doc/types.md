@@ -71,26 +71,26 @@ myObj.foo = 5
 myObj['foo']   // returns 5
 ```
 
-If you put something in the brackets that is not a string, it will be coerced into a string, and that will be used as the key.
+Objects' keys are always strings. If you put a value in the brackets that is not a string, the value will be coerced into a string, and that will be used as the key.
 
 ```javascript
 myObj[{}] = 'hello'
 ```
 
-The `{}` represents a new, empty object. To turn it into a string, its `toString()`method is called, which returns '[object Object]'. So this will set the property of `myObj` called "[object Object]" to the string 'hello'.
+Here, the `{}` represents a new, empty object. To turn it into a string, its `toString()`method is called, which returns '[object Object]'. So this will set the property of `myObj` called "[object Object]" to the string 'hello'.
 
 ```javascript
 var name_of_key = ({}).toString()      // '[object Object]'
 myObj[name_of_key] === 'hello'         // returns true
 ```
 
-Other things like numbers are coerced into strings too.
+Other values like numbers are coerced into strings too.
 
 ### Arrays
 
 Arrays are objects. Their constructor is `Array`. Their prototype is `Array.prototype`. There are some slight differences between arrays and other objects, which JS provides to make arrays easier to work with. But it's important to understand that arrays are really just objects.
 
-When you get or set an element of an array, you are doing the same thing as getting/setting a property of any object. The difference is that with an array, if you set properties whose keys are numbers, the `length` property will update itself.
+When you get or set an element of an array, you are doing the same thing as getting/setting a property of any object. The difference is that the `length`property of arrays updates automatically.
 
 ```javascript
 var arr = ['a', 'b', 'c']
@@ -107,7 +107,11 @@ arr[0]                        // returns undefined
 arr['myProperty']             // still 62
 ```
 
-The Array prototype defines some useful methods like `indexOf`, which come in handy. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too, if you want. Remember: arrays are (mostly) just objects.
+Remember, arrays are just objects, so their keys are strings. Any time you use a numeric index on an array, it is coerced to a string.
+
+The Array prototype defines some useful methods like `indexOf`, which come in handy. But there's really not much special going on here. You can setup a prototype with a bunch of useful methods and create objects from it too, if you want. On the other hand, you can't replicate the magic behavior of the array's `length` property.
+
+Remember: arrays are (mostly) just objects.
 
 
 ### Functions
@@ -338,7 +342,7 @@ console.log(Object.keys(myObj))
 // logs 'sup'
 console.log(myObj[mySymbol])
 
-// logs Symbol(cool)
+// logs [Symbol(cool)]
 console.log(Object.getOwnPropertySymbols(myObj))
 ```
 
