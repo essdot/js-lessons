@@ -44,18 +44,19 @@ The rules are as follows -- you might not agree with them! In fact you might thi
 1. If the operand's type is undefined, return 'undefined'.
 2. If the operand's type is boolean, return 'boolean'.
 3. If the operand's type is string, return 'string'.
-4. If the operand's type is symbol, return 'symbol'.
+4. If the operand's type is number, return 'number'.
+5. If the operand's type is symbol, return 'symbol'.
 
    Good so far, right? Strap in, here we go.
 
-5. If the operand's type is null, return 'object'. (What????)
-6. If the operand's type is object, and the operand can be called, return 'function'. (Functions are just objects that can be called/invoked. But 'function' is not a type.)
+6. If the operand's type is null, return 'object'. (What????)
+7. If the operand's type is object, and the operand can be called, return 'function'. (Functions are just objects that can be called/invoked. But 'function' is not a type.)
 7. If the operand is a built-in object (native to the JS engine), and it can't be called, return 'object'.
-8. If the operand is an object which is not built-in, and it can't be called, return anything except 'undefined', 'boolean', 'function', 'number', 'symbol' or 'string'. (This is meant to be implementation-specific, but as far as I am aware all implementations return 'object'.)
+9. If the operand is an object which is not built-in, and it can't be called, return anything except 'undefined', 'boolean', 'function', 'number', 'symbol' or 'string'. (This is meant to be implementation-specific, but as far as I am aware all implementations return 'object'.)
 
 *(You can see the full definition of `typeof` in [the ECMAScript 6 spec, section 12.5.6.](http://www.ecma-international.org/ecma-262/6.0/#sec-typeof-operator))*
 
-The point here isn't that `typeof` sucks. (It does kinda suck, though.) The point is just that it can lead you astray when trying to understand JS types. As an exercise, you could try writing a small library for determining the types of values. Try including functions that check whether something is an array, or a function, or NaN.
+The point here isn't that `typeof` sucks. (It does kinda suck, though.) The point is just that it can lead you astray when trying to understand JS types. As an exercise, you could try writing a small library for determining the types of values. Try including functions that check whether something is an array, or a function, or `NaN`.
 
 
 ## Objects
