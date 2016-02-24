@@ -346,6 +346,8 @@ console.log(myObj[mySymbol])
 console.log(Object.getOwnPropertySymbols(myObj))
 ```
 
+If you need to convert a symbol to some other type, you should do it directly instead of trying to coerce it. Coercing symbols to other primitive types might cause a `TypeError`. To convert a symbol to a string, for example, pass it to the `String` function instead of trying to concatenate it to a string with the `+` operator.
+
 
 ## Symbol() function
 
