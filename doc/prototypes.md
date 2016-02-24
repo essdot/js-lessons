@@ -108,7 +108,7 @@ sportsCar.honkHorn()
 ```
 
 Note:
-You can create an object that has no prototype, by passing `null` to `Object.create`. The resulting object will not have `Object.prototype` as its prototype, its prototype will be `null`. It won't have any properties, even the properties that objects normally have like `toString` and `hasOwnProperty`.
+You can create an object that has no prototype, by passing `null` to `Object.create`. The resulting object will not have `Object.prototype` as its prototype, its prototype will be `null`. It won't have any properties, because it has no properties of its own, and no prototype to inherit properties from.
 
 # Constructors
 
