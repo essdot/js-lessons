@@ -1,6 +1,6 @@
 # Functions
 
-In Javascript, functions are objects:
+In JavaScript, functions are objects:
 
 ```javascript
 const myObj = {}
@@ -34,7 +34,7 @@ function log3 (first, second, third) {
 log3('a')
 ```
 
-Arguments in Javascript are always positional, there are no keyword args like in Python. (However, a similar effect could be achieved by having a function accept an "options" object whose properties are arguments.)
+Arguments in JavaScript are always positional, there are no keyword args like in Python. (However, a similar effect could be achieved by having a function accept an "options" object whose properties are arguments.)
 
 If a function is called with more arguments than it declares, the extra values will be available in the `arguments` object. `arguments` is an array-like object containing the arguments the function was called with, in order. 
 

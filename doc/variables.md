@@ -1,6 +1,6 @@
 # Variables
 
-Variables in Javascript are not restricted to a single type, they can have any value. The same variable can be reassigned to hold values of different types, this is legal in Javascript.
+Variables in JavaScript are not restricted to a single type, they can have any value. The same variable can be reassigned to hold values of different types, this is legal in JavaScript.
 
 As of ES6, variables can be declared with `var` or `let`. If you are using ES6, you should always use `let` and not `var`. There is no reason to use `var` (again, assuming you're in ES6), so just don't use `var`, and always use `let`.
 
@@ -21,7 +21,7 @@ x = 5
 
 If you declare a variable without initializing its value, the value of the variable will be `undefined`.
 
-If you assign to a variable without declaring it with `let` first, Javascript will do a terrible thing: It will assume you're creating a new *global* variable. That is why you must always use the `let` keyword.
+If you assign to a variable without declaring it with `let` first, JavaScript will do a terrible thing: It will assume you're creating a new *global* variable. That is why you must always use the `let` keyword.
 
 ```
 // DON'T EVER DO THIS! 
@@ -44,7 +44,7 @@ function outerFunc () {
 }
 ```
 
-The exception to this is strict mode. In strict mode, the above will be an error. This is an attempt to remedy one of Javascript's biggest design flaws. It's a nasty one. 
+The exception to this is strict mode. In strict mode, the above will be an error. This is an attempt to remedy one of JavaScript's biggest design flaws. It's a nasty one.
 
 **Always, always declare variables with `let`.**
 
@@ -98,7 +98,7 @@ console.log(diesel) // logs false
 
 ## Hoisting
 
-Javascript has a feature called "hoisting". What it means is the JS runtime will silently rearrange the code that you write, putting `var` declarations at the very top of every function, before any other code runs within the function.
+JavaScript has a feature called "hoisting". What it means is the JS runtime will silently rearrange the code that you write, putting `var` declarations at the very top of every function, before any other code runs within the function.
 
 If you think "the JS engine silently rewrites your code" sounds like a recipe for bugs, you are correct! This feature is somewhat dangerous, and it often trips up JS developers.
 
@@ -145,7 +145,7 @@ function myFunc () {
 
 You can see how, due to hoisting, the declaration will run, but the assignment will not.
 
-Remember that in Javascript:
+Remember that in JavaScript:
 
 * Variables declared with `var` have function scope -- they can be seen everywhere within the function.
 * `var` declarations are hoisted to the top of the function. This includes inner functions defined in the function.
