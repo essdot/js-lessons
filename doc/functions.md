@@ -310,9 +310,9 @@ Names are also needed for recursion; if you need to call a function inside its b
 
 ## Function statements & expressions
 
-JavaScript's grammar has two ways of defining functions: the function statement and the function expression. By the rules of JavaScript's syntax, if the first token in a statement is `function`, it is a function statement. Otherwise it is a function expression.
+JavaScript's grammar has two ways of defining functions: the function statement and the function expression. By the rules of JavaScript's syntax, if the first token in a statement is `function`, then that statement is a function statement. Otherwise, `function` is the first token of a function expression.
 
-A function expression evaluates to the function. A function statement, on the other hand, does not. So function statements cannot be directly invoked.
+A function expression evaluates to the function. A function statement, on the other hand, does not. So function statements cannot be directly invoked. Function statements define functions, which can later be invoked by name -- that name being an expression, which evaluates to a function, which can be invoked.
 
 This means that the following results in a syntax error:
 
